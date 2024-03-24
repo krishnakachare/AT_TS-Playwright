@@ -16,7 +16,7 @@ Welcome to the course "Introduction to Playwright" by [Shrikrishna Kachare] ..
 - [package-lock.json](/package-lock.json)
 - [playwright.config.ts](/playwright.config.ts)
 
-💡 Share on LinkedIn something interesting you've learned! Don't forget to tag me [Shrikrishna Kachare](www.linkedin.com/in/shrikrishna-kachare-9a9411221).
+💡 Share on LinkedIn something interesting you've learned! Don't forget to tag me [Shrikrishna Kachare](https://www.linkedin.com/in/shrikrishna-kachare-9a9411221/).
 
 
 Happy Testing 🎭!

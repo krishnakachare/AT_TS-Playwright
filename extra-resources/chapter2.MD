@@ -32,7 +32,7 @@ Welcome to the course "Introduction to Playwright" by [Shrikrishna Kachare] ..
 1. [Why do we write await in Playwright](https://jadala-ajay16.medium.com/why-do-we-write-await-async-in-playwright-javascript-typescript-fa3c92f82841#:~:text=The%20await%20expression%20causes%20async,line%20of%20code%20executes%20completely)
 
 
-💡 Share on LinkedIn something interesting you've learned! Don't forget to tag me [Shrikrishna Kachare](www.linkedin.com/in/shrikrishna-kachare-9a9411221).
+💡 Share on LinkedIn something interesting you've learned! Don't forget to tag me [Shrikrishna Kachare](https://www.linkedin.com/in/shrikrishna-kachare-9a9411221/).
 
 
 

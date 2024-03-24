@@ -19,7 +19,7 @@ Welcome to the course "Introduction to Playwright" by [Shrikrishna Kachare] ..
 1. Explore few of the methods of the testInfo. Which one did you find more interesting?
 
 
-💡 Share on LinkedIn something interesting you've learned! Don't forget to tag me [Shrikrishna Kachare](www.linkedin.com/in/shrikrishna-kachare-9a9411221).
+💡 Share on LinkedIn something interesting you've learned! Don't forget to tag me [Shrikrishna Kachare](https://www.linkedin.com/in/shrikrishna-kachare-9a9411221/).
 
 
 

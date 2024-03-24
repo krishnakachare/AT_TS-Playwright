@@ -30,7 +30,7 @@ IMPORTANT: to run the tests from `main`, you'll need to setup your [.env](.env) 
 
 ---
 
-💡 Share on LinkedIn something interesting you've learned! Don't forget to tag me [Shrikrishna Kachare](www.linkedin.com/in/shrikrishna-kachare-9a9411221).
+💡 Share on LinkedIn something interesting you've learned! Don't forget to tag me [Shrikrishna Kachare](https://www.linkedin.com/in/shrikrishna-kachare-9a9411221//).
 
 
 Happy Testing 🎭

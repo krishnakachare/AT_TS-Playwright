@@ -24,7 +24,7 @@ Welcome to the course "Introduction to Playwright" by [Shrikrishna Kachare] ..
 1. https://testingwithrenata.com/blog/visual-regression/visual-regression-testing-with-applitools/
 1. https://testingwithrenata.com/blog/visual-regression/how-to-structure-visual-regression-testing-based-on-business-needs/
 
-💡 Share on LinkedIn something interesting you've learned! Don't forget to tag me [Shrikrishna Kachare](www.linkedin.com/in/shrikrishna-kachare-9a9411221).
+💡 Share on LinkedIn something interesting you've learned! Don't forget to tag me [Shrikrishna Kachare](https://www.linkedin.com/in/shrikrishna-kachare-9a9411221/).
 
 
 
