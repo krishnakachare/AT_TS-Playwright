@@ -6,6 +6,8 @@ Inside that directory, you can run several commands:
   npx playwright test
     Runs the end-to-end tests.
 
+npx playwright show-report
+
   npx playwright test --ui
     Starts the interactive UI mode.
 
@@ -21,11 +23,9 @@ Inside that directory, you can run several commands:
   npx playwright codegen
     Auto generate tests with Codegen.
 
-We suggest that you begin by typing:
 
-    npx playwright test
 
-npx playwright show-report
+
 
 npx playwright test --failed-test
 
@@ -39,3 +39,8 @@ playwright.config.ts: The Playwright Test Configuration file.
 tests/: Top-level folder that Playwright searches recursively for tests with an example test script.
 tests-examples/: Staging folder with a demo todo app test script to try out.
 package.json: The npm project file.
+
+
+same TC will repeat multipal times
+
+npx playwrite test testFilePath --repeat-each=3

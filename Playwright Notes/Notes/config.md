@@ -307,63 +307,6 @@ export default defineConfig({
 
 ---
 
-## **Complete Configuration Reference Table**
-
-| Category | Option | Type | Default | Description |
-|----------|--------|------|---------|-------------|
-| **Discovery** | testDir | string | `'./tests'` | Directory containing test files |
-| | testMatch | string/regex | `'**/*test*.js'` | Glob pattern for test files to include |
-| | testIgnore | string/regex | `'**/node_modules/**'` | Glob pattern for test files to ignore |
-| **Parallelization** | fullyParallel | boolean | `false` | Run all tests in parallel |
-| | workers | number/string | `undefined` | Number of parallel workers (or CPU percentage) |
-| **Retries & CI** | retries | number | `0` | Number of retries for failed tests |
-| | forbidOnly | boolean | `false` | Fail if `test.only` is found |
-| **Timeouts** | timeout | number | `30000` | Test timeout in milliseconds |
-| | globalTimeout | number | `1800000` | Total suite timeout in milliseconds |
-| | expect.timeout | number | `5000` | Assertion timeout in milliseconds |
-| **Reporting** | reporter | string/array | `'list'` | Reporter format (`'html'`, `'json'`, `'junit'`, etc.) |
-| **Output** | outputDir | string | `'test-results'` | Directory for artifacts |
-| | snapshotDir | string | `'__snapshots__'` | Directory for snapshots |
-| | snapshotPathTemplate | string | `'{dir}/{testFileDir}...'` | Snapshot file path template |
-| **Setup/Teardown** | globalSetup | string | `undefined` | Global setup file path |
-| | globalTeardown | string | `undefined` | Global teardown file path |
-| **Web Server** | webServer.command | string | `undefined` | Command to start dev server |
-| | webServer.url | string | `undefined` | URL to wait for server |
-| | webServer.reuseExistingServer | boolean | `true` | Reuse running server |
-| | webServer.timeout | number | `120000` | Server startup timeout |
-| **Browser/Page (use)** | baseURL | string | `undefined` | Base URL for navigation |
-| | testIdAttribute | string | `'data-testid'` | Attribute for test ID locators |
-| | headless | boolean | `true` | Run browser in headless mode |
-| | screenshot | string | `'off'` | Screenshot on failure (`'on'`, `'off'`, `'only-on-failure'`) |
-| | screenshotDir | string | `undefined` | Screenshot directory |
-| | video | string | `'off'` | Record video (`'on'`, `'off'`, `'retain-on-failure'`) |
-| | videoDir | string | `undefined` | Video directory |
-| | trace | string | `'off'` | Trace recording (`'on'`, `'off'`, `'on-first-retry'`) |
-| | traceDir | string | `undefined` | Trace directory |
-| | actionTimeout | number | `10000` | Action timeout in milliseconds |
-| | navigationTimeout | number | `30000` | Navigation timeout in milliseconds |
-| | launchTimeout | number | `30000` | Browser launch timeout |
-| **Authentication** | storageState | string/object | `undefined` | Save/load auth cookies |
-| | httpCredentials | object | `undefined` | HTTP Basic Auth credentials |
-| | extraHTTPHeaders | object | `undefined` | Extra HTTP headers for requests |
-| **Device Emulation** | viewport | object | `{ width: 1280, height: 720 }` | Viewport size |
-| | deviceScaleFactor | number | `1` | Device scale factor |
-| | isMobile | boolean | `false` | Emulate mobile device |
-| | hasTouch | boolean | `false` | Enable touch events |
-| | userAgent | string | `undefined` | Custom user agent |
-| | locale | string | `'en-US'` | Locale for emulation |
-| | timezoneId | string | `'America/Los_Angeles'` | Timezone ID |
-| | geolocation | object | `undefined` | Geolocation coordinates |
-| | permissions | array | `[]` | Browser permissions (`'camera'`, `'microphone'`) |
-| | colorScheme | string | `'light'` | Color scheme (`'light'`, `'dark'`, `'no-preference'`) |
-| | reducedMotion | string | `'no-preference'` | Reduced motion setting |
-| | forcedColors | string | `'none'` | Forced colors mode |
-| **Network** | offline | boolean | `false` | Simulate offline mode |
-| | bypassCSP | boolean | `false` | Bypass Content Security Policy |
-| | acceptDownloads | boolean | `true` | Accept download prompts |
-| | javaScriptEnabled | boolean | `true` | Enable JavaScript |
-
----
 
 ## **Projects Configuration Reference**
 
@@ -391,6 +334,3 @@ projects: [
 ]
 ```
 
----
-
-Your configuration is well-structured for both local development and CI/CD pipelines!
