@@ -1,0 +1,3190 @@
+%PDF-1.6
+%ˆ‰¸ﬂ
+1 0 obj
+<<
+/Type /Catalog
+/Pages 2 0 R
+/Metadata 44 0 R
+/Version /1.6
+>>
+endobj
+7 0 obj
+<<
+/Length 3968
+>>
+stream
+BT
+/F2 22 Tf
+1 0 0 1 42 799.89 Tm
+(Playwright Agentic AI Framework Guide) Tj
+/F2 16 Tf
+1 0 0 1 42 765.39 Tm
+(Who This Guide Is For) Tj
+/F1 10 Tf
+1 0 0 1 42 737.89 Tm
+(This guide explains the Playwright Agentic AI Framework in a simple, practical way. It is) Tj
+/F1 10 Tf
+1 0 0 1 42 724.89 Tm
+(written for:) Tj
+/F1 10 Tf
+1 0 0 1 42 705.39 Tm
+(- new automation engineers joining the project) Tj
+/F1 10 Tf
+1 0 0 1 42 692.39 Tm
+(- QA leads reviewing the architecture) Tj
+/F1 10 Tf
+1 0 0 1 42 679.39 Tm
+(- developers who want to understand UI/API test flow) Tj
+/F1 10 Tf
+1 0 0 1 42 666.39 Tm
+(- AI-agent users who need to understand spec-driven generation) Tj
+/F1 10 Tf
+1 0 0 1 42 653.39 Tm
+(- teams who want to use this framework as a reference architecture) Tj
+/F1 10 Tf
+1 0 0 1 42 633.89 Tm
+(The goal is simple:) Tj
+/F3 8 Tf
+1 0 0 1 42 614.39 Tm
+(Understand where input starts, how AI converts it into tests, how Playwright runs it,) Tj
+/F3 8 Tf
+1 0 0 1 42 604.39 Tm
+(and how the framework remembers, validates, reports, and improves over time.) Tj
+/F1 10 Tf
+1 0 0 1 42 587.89 Tm
+(---) Tj
+/F2 16 Tf
+1 0 0 1 42 568.39 Tm
+(1. Project Architecture) Tj
+/F1 10 Tf
+1 0 0 1 42 540.89 Tm
+(The project follows a framework-first, manifest-driven, validator-governed architecture.) Tj
+/F1 10 Tf
+1 0 0 1 42 521.39 Tm
+(High-level layers:) Tj
+/F3 8 Tf
+1 0 0 1 42 501.89 Tm
+(Input Layer) Tj
+/F3 8 Tf
+1 0 0 1 42 491.89 Tm
+(  specs/) Tj
+/F3 8 Tf
+1 0 0 1 42 481.89 Tm
+() Tj
+/F3 8 Tf
+1 0 0 1 42 471.89 Tm
+(AI Governance Layer) Tj
+/F3 8 Tf
+1 0 0 1 42 461.89 Tm
+(  src/ai/) Tj
+/F3 8 Tf
+1 0 0 1 42 451.89 Tm
+() Tj
+/F3 8 Tf
+1 0 0 1 42 441.89 Tm
+(Orchestration Layer) Tj
+/F3 8 Tf
+1 0 0 1 42 431.89 Tm
+(  scripts/) Tj
+/F3 8 Tf
+1 0 0 1 42 421.89 Tm
+() Tj
+/F3 8 Tf
+1 0 0 1 42 411.89 Tm
+(Execution Framework Layer) Tj
+/F3 8 Tf
+1 0 0 1 42 401.89 Tm
+(  src/fixtures) Tj
+/F3 8 Tf
+1 0 0 1 42 391.89 Tm
+(  src/pages) Tj
+/F3 8 Tf
+1 0 0 1 42 381.89 Tm
+(  src/components) Tj
+/F3 8 Tf
+1 0 0 1 42 371.89 Tm
+(  src/api) Tj
+/F3 8 Tf
+1 0 0 1 42 361.89 Tm
+(  src/config) Tj
+/F3 8 Tf
+1 0 0 1 42 351.89 Tm
+(  src/utils) Tj
+/F3 8 Tf
+1 0 0 1 42 341.89 Tm
+() Tj
+/F3 8 Tf
+1 0 0 1 42 331.89 Tm
+(Executable Test Layer) Tj
+/F3 8 Tf
+1 0 0 1 42 321.89 Tm
+(  tests/) Tj
+/F3 8 Tf
+1 0 0 1 42 311.89 Tm
+() Tj
+/F3 8 Tf
+1 0 0 1 42 301.89 Tm
+(Evidence And Feedback Layer) Tj
+/F3 8 Tf
+1 0 0 1 42 291.89 Tm
+(  artifacts/) Tj
+/F1 10 Tf
+1 0 0 1 42 275.39 Tm
+(The most important architecture idea:) Tj
+/F3 8 Tf
+1 0 0 1 42 255.89 Tm
+(AI does not directly write random Playwright tests.) Tj
+/F3 8 Tf
+1 0 0 1 42 245.89 Tm
+(AI must go through normalized input, manifests, planning, generation, validation, and registry) Tj
+/F3 8 Tf
+1 0 0 1 42 235.89 Tm
+(traceability.) Tj
+/F1 10 Tf
+1 0 0 1 42 219.39 Tm
+(This makes the framework safer, repeatable, and easier to maintain in a product-company) Tj
+/F1 10 Tf
+1 0 0 1 42 206.39 Tm
+(setup.) Tj
+/F1 10 Tf
+1 0 0 1 42 186.89 Tm
+(---) Tj
+/F2 16 Tf
+1 0 0 1 42 167.39 Tm
+(2. Architecture Diagram) Tj
+/F3 8 Tf
+1 0 0 1 42 139.89 Tm
+(                                 +----------------------+) Tj
+/F3 8 Tf
+1 0 0 1 42 129.89 Tm
+(                                 |     User / Source    |) Tj
+/F3 8 Tf
+1 0 0 1 42 119.88999999999999 Tm
+(                                 | story, OpenAPI, Jira |) Tj
+/F3 8 Tf
+1 0 0 1 42 109.88999999999999 Tm
+(                                 +----------+-----------+) Tj
+/F3 8 Tf
+1 0 0 1 42 99.88999999999999 Tm
+(                                            |) Tj
+/F3 8 Tf
+1 0 0 1 42 89.88999999999999 Tm
+(                                            v) Tj
+/F3 8 Tf
+1 0 0 1 42 79.88999999999999 Tm
+(                                 +----------------------+) Tj
+/F3 8 Tf
+1 0 0 1 42 69.88999999999999 Tm
+(                                 |        specs/        |) Tj
+/F3 8 Tf
+1 0 0 1 42 59.889999999999986 Tm
+(                                 | raw source inputs    |) Tj
+/F3 8 Tf
+1 0 0 1 42 49.889999999999986 Tm
+(                                 +----------+-----------+) Tj
+ET
+endstream
+endobj
+9 0 obj
+<<
+/Length 6339
+>>
+stream
+BT
+/F3 8 Tf
+1 0 0 1 42 799.89 Tm
+(                                            |) Tj
+/F3 8 Tf
+1 0 0 1 42 789.89 Tm
+(                                            v) Tj
+/F3 8 Tf
+1 0 0 1 42 779.89 Tm
+(                                 +----------------------+) Tj
+/F3 8 Tf
+1 0 0 1 42 769.89 Tm
+(                                 |     Normalizers      |) Tj
+/F3 8 Tf
+1 0 0 1 42 759.89 Tm
+(                                 | scripts/normalize-*  |) Tj
+/F3 8 Tf
+1 0 0 1 42 749.89 Tm
+(                                 +----------+-----------+) Tj
+/F3 8 Tf
+1 0 0 1 42 739.89 Tm
+(                                            |) Tj
+/F3 8 Tf
+1 0 0 1 42 729.89 Tm
+(                     +----------------------+----------------------+) Tj
+/F3 8 Tf
+1 0 0 1 42 719.89 Tm
+(                     |                                             |) Tj
+/F3 8 Tf
+1 0 0 1 42 709.89 Tm
+(                     v                                             v) Tj
+/F3 8 Tf
+1 0 0 1 42 699.89 Tm
+(        +-----------------------------+              +-----------------------------+) Tj
+/F3 8 Tf
+1 0 0 1 42 689.89 Tm
+(        | artifacts/normalized-input  |              | artifacts/manifests         |) Tj
+/F3 8 Tf
+1 0 0 1 42 679.89 Tm
+(        | what framework understood   |              | manifest candidates         |) Tj
+/F3 8 Tf
+1 0 0 1 42 669.89 Tm
+(        +-------------+---------------+              +-------------+---------------+) Tj
+/F3 8 Tf
+1 0 0 1 42 659.89 Tm
+(                      |                                            |) Tj
+/F3 8 Tf
+1 0 0 1 42 649.89 Tm
+(                      +----------------------+---------------------+) Tj
+/F3 8 Tf
+1 0 0 1 42 639.89 Tm
+(                                             |) Tj
+/F3 8 Tf
+1 0 0 1 42 629.89 Tm
+(                                             v) Tj
+/F3 8 Tf
+1 0 0 1 42 619.89 Tm
+(                                +--------------------------+) Tj
+/F3 8 Tf
+1 0 0 1 42 609.89 Tm
+(                                | Manifest Promotion       |) Tj
+/F3 8 Tf
+1 0 0 1 42 599.89 Tm
+(                                | promote candidates       |) Tj
+/F3 8 Tf
+1 0 0 1 42 589.89 Tm
+(                                +------------+-------------+) Tj
+/F3 8 Tf
+1 0 0 1 42 579.89 Tm
+(                                             |) Tj
+/F3 8 Tf
+1 0 0 1 42 569.89 Tm
+(                                             v) Tj
+/F3 8 Tf
+1 0 0 1 42 559.89 Tm
+(                                +--------------------------+) Tj
+/F3 8 Tf
+1 0 0 1 42 549.89 Tm
+(                                | src/ai/manifests         |) Tj
+/F3 8 Tf
+1 0 0 1 42 539.89 Tm
+(                                | active test intent       |) Tj
+/F3 8 Tf
+1 0 0 1 42 529.89 Tm
+(                                +------------+-------------+) Tj
+/F3 8 Tf
+1 0 0 1 42 519.89 Tm
+(                                             |) Tj
+/F3 8 Tf
+1 0 0 1 42 509.89 Tm
+(                                             v) Tj
+/F3 8 Tf
+1 0 0 1 42 499.89 Tm
+(                                +--------------------------+) Tj
+/F3 8 Tf
+1 0 0 1 42 489.89 Tm
+(                                | Plan Changes             |) Tj
+/F3 8 Tf
+1 0 0 1 42 479.89 Tm
+(                                | create/update/reuse?     |) Tj
+/F3 8 Tf
+1 0 0 1 42 469.89 Tm
+(                                +------------+-------------+) Tj
+/F3 8 Tf
+1 0 0 1 42 459.89 Tm
+(                                             |) Tj
+/F3 8 Tf
+1 0 0 1 42 449.89 Tm
+(                                             v) Tj
+/F3 8 Tf
+1 0 0 1 42 439.89 Tm
+(                                +--------------------------+) Tj
+/F3 8 Tf
+1 0 0 1 42 429.89 Tm
+(                                | Generate Tests           |) Tj
+/F3 8 Tf
+1 0 0 1 42 419.89 Tm
+(                                | tests/**/*.spec.ts       |) Tj
+/F3 8 Tf
+1 0 0 1 42 409.89 Tm
+(                                +------------+-------------+) Tj
+/F3 8 Tf
+1 0 0 1 42 399.89 Tm
+(                                             |) Tj
+/F3 8 Tf
+1 0 0 1 42 389.89 Tm
+(                                             v) Tj
+/F3 8 Tf
+1 0 0 1 42 379.89 Tm
+(                                +--------------------------+) Tj
+/F3 8 Tf
+1 0 0 1 42 369.89 Tm
+(                                | Validate + Run           |) Tj
+/F3 8 Tf
+1 0 0 1 42 359.89 Tm
+(                                | Playwright execution     |) Tj
+/F3 8 Tf
+1 0 0 1 42 349.89 Tm
+(                                +------------+-------------+) Tj
+/F3 8 Tf
+1 0 0 1 42 339.89 Tm
+(                                             |) Tj
+/F3 8 Tf
+1 0 0 1 42 329.89 Tm
+(                                             v) Tj
+/F3 8 Tf
+1 0 0 1 42 319.89 Tm
+(                                +--------------------------+) Tj
+/F3 8 Tf
+1 0 0 1 42 309.89 Tm
+(                                | Feedback Loop            |) Tj
+/F3 8 Tf
+1 0 0 1 42 299.89 Tm
+(                                | registry, healing,       |) Tj
+/F3 8 Tf
+1 0 0 1 42 289.89 Tm
+(                                | flakes, analytics        |) Tj
+/F3 8 Tf
+1 0 0 1 42 279.89 Tm
+(                                +--------------------------+) Tj
+/F1 10 Tf
+1 0 0 1 42 263.39 Tm
+(---) Tj
+/F2 16 Tf
+1 0 0 1 42 243.89 Tm
+(3. End To End Framework Flow) Tj
+/F1 10 Tf
+1 0 0 1 42 216.39 Tm
+(The complete framework flow is:) Tj
+/F3 8 Tf
+1 0 0 1 42 196.89 Tm
+(1. Put source input under specs/) Tj
+/F3 8 Tf
+1 0 0 1 42 186.89 Tm
+(2. Normalize source input into structured JSON) Tj
+/F3 8 Tf
+1 0 0 1 42 176.89 Tm
+(3. Create manifest candidates) Tj
+/F3 8 Tf
+1 0 0 1 42 166.89 Tm
+(4. Promote approved candidates into active manifests) Tj
+/F3 8 Tf
+1 0 0 1 42 156.89 Tm
+(5. Plan changes by comparing manifests, registry, and test files) Tj
+/F3 8 Tf
+1 0 0 1 42 146.89 Tm
+(6. Generate or reuse Playwright tests) Tj
+/F3 8 Tf
+1 0 0 1 42 136.89 Tm
+(7. Sync registry) Tj
+/F3 8 Tf
+1 0 0 1 42 126.88999999999999 Tm
+(8. Validate manifests, registry, code, framework rules, and secrets) Tj
+/F3 8 Tf
+1 0 0 1 42 116.88999999999999 Tm
+(9. Run Playwright tests) Tj
+/F3 8 Tf
+1 0 0 1 42 106.88999999999999 Tm
+(10. Update registry execution status) Tj
+/F3 8 Tf
+1 0 0 1 42 96.88999999999999 Tm
+(11. Classify failures) Tj
+/F3 8 Tf
+1 0 0 1 42 86.88999999999999 Tm
+(12. Create healing plan) Tj
+/F3 8 Tf
+1 0 0 1 42 76.88999999999999 Tm
+(13. Analyze flakes) Tj
+/F3 8 Tf
+1 0 0 1 42 66.88999999999999 Tm
+(14. Generate execution analytics and reports) Tj
+/F1 10 Tf
+1 0 0 1 42 50.389999999999986 Tm
+(Short memory version:) Tj
+ET
+endstream
+endobj
+11 0 obj
+<<
+/Length 3682
+>>
+stream
+BT
+/F3 8 Tf
+1 0 0 1 42 799.89 Tm
+(specs -> normalized input -> candidates -> active manifests -> plan -> tests -> registry -> run) Tj
+/F3 8 Tf
+1 0 0 1 42 789.89 Tm
+(-> feedback) Tj
+/F1 10 Tf
+1 0 0 1 42 773.39 Tm
+(Daily command example:) Tj
+/F3 8 Tf
+1 0 0 1 42 753.89 Tm
+(npm run agentic -- --action=full --input-type=openapi --mode=api --strategy=auto --env=qa) Tj
+/F1 10 Tf
+1 0 0 1 42 737.39 Tm
+(This means:) Tj
+/F3 8 Tf
+1 0 0 1 42 717.89 Tm
+(Use OpenAPI input.) Tj
+/F3 8 Tf
+1 0 0 1 42 707.89 Tm
+(Promote manifest candidates.) Tj
+/F3 8 Tf
+1 0 0 1 42 697.89 Tm
+(Plan and generate API tests.) Tj
+/F3 8 Tf
+1 0 0 1 42 687.89 Tm
+(Validate the framework.) Tj
+/F3 8 Tf
+1 0 0 1 42 677.89 Tm
+(Run API tests.) Tj
+/F3 8 Tf
+1 0 0 1 42 667.89 Tm
+(Generate reports and feedback artifacts.) Tj
+/F1 10 Tf
+1 0 0 1 42 651.39 Tm
+(---) Tj
+/F2 16 Tf
+1 0 0 1 42 631.89 Tm
+(4. Framework Components) Tj
+/F1 10 Tf
+1 0 0 1 42 604.39 Tm
+(The framework has these major components.) Tj
+/F2 12 Tf
+1 0 0 1 42 584.89 Tm
+(Input Components) Tj
+/F3 8 Tf
+1 0 0 1 42 562.39 Tm
+(specs/openapi) Tj
+/F3 8 Tf
+1 0 0 1 42 552.39 Tm
+(specs/stories) Tj
+/F3 8 Tf
+1 0 0 1 42 542.39 Tm
+(specs/jira) Tj
+/F3 8 Tf
+1 0 0 1 42 532.39 Tm
+(specs/user-input) Tj
+/F3 8 Tf
+1 0 0 1 42 522.39 Tm
+(specs/screenshots) Tj
+/F1 10 Tf
+1 0 0 1 42 505.89 Tm
+(These folders contain raw inputs. They are not executable tests.) Tj
+/F2 12 Tf
+1 0 0 1 42 486.39 Tm
+(AI Governance Components) Tj
+/F3 8 Tf
+1 0 0 1 42 463.89 Tm
+(src/ai/agent.md) Tj
+/F3 8 Tf
+1 0 0 1 42 453.89 Tm
+(src/ai/governance) Tj
+/F3 8 Tf
+1 0 0 1 42 443.89 Tm
+(src/ai/manifests) Tj
+/F3 8 Tf
+1 0 0 1 42 433.89 Tm
+(src/ai/registry) Tj
+/F3 8 Tf
+1 0 0 1 42 423.89 Tm
+(src/ai/schemas) Tj
+/F3 8 Tf
+1 0 0 1 42 413.89 Tm
+(src/ai/skills) Tj
+/F3 8 Tf
+1 0 0 1 42 403.89 Tm
+(src/ai/templates) Tj
+/F1 10 Tf
+1 0 0 1 42 387.39 Tm
+(These files define how AI is allowed to work.) Tj
+/F2 12 Tf
+1 0 0 1 42 367.89 Tm
+(Orchestration Components) Tj
+/F3 8 Tf
+1 0 0 1 42 345.39 Tm
+(scripts/agentic-runner.mjs) Tj
+/F3 8 Tf
+1 0 0 1 42 335.39 Tm
+(scripts/normalize-openapi.mjs) Tj
+/F3 8 Tf
+1 0 0 1 42 325.39 Tm
+(scripts/normalize-story.mjs) Tj
+/F3 8 Tf
+1 0 0 1 42 315.39 Tm
+(scripts/normalize-jira.mjs) Tj
+/F3 8 Tf
+1 0 0 1 42 305.39 Tm
+(scripts/normalize-user-input.mjs) Tj
+/F3 8 Tf
+1 0 0 1 42 295.39 Tm
+(scripts/normalize-screenshot.mjs) Tj
+/F3 8 Tf
+1 0 0 1 42 285.39 Tm
+(scripts/promote-manifest-candidates.mjs) Tj
+/F3 8 Tf
+1 0 0 1 42 275.39 Tm
+(scripts/plan-changes.mjs) Tj
+/F3 8 Tf
+1 0 0 1 42 265.39 Tm
+(scripts/generate-from-manifests.mjs) Tj
+/F3 8 Tf
+1 0 0 1 42 255.39 Tm
+(scripts/sync-registry.mjs) Tj
+/F3 8 Tf
+1 0 0 1 42 245.39 Tm
+(scripts/validate-manifests.mjs) Tj
+/F3 8 Tf
+1 0 0 1 42 235.39 Tm
+(scripts/check-registry.mjs) Tj
+/F3 8 Tf
+1 0 0 1 42 225.39 Tm
+(scripts/validate-framework.mjs) Tj
+/F3 8 Tf
+1 0 0 1 42 215.39 Tm
+(scripts/validate-secrets.mjs) Tj
+/F3 8 Tf
+1 0 0 1 42 205.39 Tm
+(scripts/classify-failures.mjs) Tj
+/F3 8 Tf
+1 0 0 1 42 195.39 Tm
+(scripts/heal-failures.mjs) Tj
+/F3 8 Tf
+1 0 0 1 42 185.39 Tm
+(scripts/analyze-flakes.mjs) Tj
+/F3 8 Tf
+1 0 0 1 42 175.39 Tm
+(scripts/generate-execution-analytics.mjs) Tj
+/F1 10 Tf
+1 0 0 1 42 158.89 Tm
+(These scripts are the automation pipeline.) Tj
+/F2 12 Tf
+1 0 0 1 42 139.39 Tm
+(Runtime Framework Components) Tj
+/F3 8 Tf
+1 0 0 1 42 116.88999999999999 Tm
+(src/config/env.ts) Tj
+/F3 8 Tf
+1 0 0 1 42 106.88999999999999 Tm
+(src/fixtures/base.fixture.ts) Tj
+/F3 8 Tf
+1 0 0 1 42 96.88999999999999 Tm
+(src/pages) Tj
+/F3 8 Tf
+1 0 0 1 42 86.88999999999999 Tm
+(src/components) Tj
+/F3 8 Tf
+1 0 0 1 42 76.88999999999999 Tm
+(src/api) Tj
+/F3 8 Tf
+1 0 0 1 42 66.88999999999999 Tm
+(src/utils) Tj
+/F3 8 Tf
+1 0 0 1 42 56.889999999999986 Tm
+(playwright.config.ts) Tj
+ET
+endstream
+endobj
+13 0 obj
+<<
+/Length 3318
+>>
+stream
+BT
+/F1 10 Tf
+1 0 0 1 42 799.89 Tm
+(These files make the tests run.) Tj
+/F2 12 Tf
+1 0 0 1 42 780.39 Tm
+(Test Components) Tj
+/F3 8 Tf
+1 0 0 1 42 757.89 Tm
+(tests/ui) Tj
+/F3 8 Tf
+1 0 0 1 42 747.89 Tm
+(tests/api) Tj
+/F3 8 Tf
+1 0 0 1 42 737.89 Tm
+(tests/hybrid) Tj
+/F1 10 Tf
+1 0 0 1 42 721.39 Tm
+(These are executable Playwright tests.) Tj
+/F2 12 Tf
+1 0 0 1 42 701.89 Tm
+(Evidence Components) Tj
+/F3 8 Tf
+1 0 0 1 42 679.39 Tm
+(artifacts/normalized-input) Tj
+/F3 8 Tf
+1 0 0 1 42 669.39 Tm
+(artifacts/manifests) Tj
+/F3 8 Tf
+1 0 0 1 42 659.39 Tm
+(artifacts/plans) Tj
+/F3 8 Tf
+1 0 0 1 42 649.39 Tm
+(artifacts/generated) Tj
+/F3 8 Tf
+1 0 0 1 42 639.39 Tm
+(artifacts/reports) Tj
+/F3 8 Tf
+1 0 0 1 42 629.39 Tm
+(artifacts/execution) Tj
+/F3 8 Tf
+1 0 0 1 42 619.39 Tm
+(artifacts/healing) Tj
+/F3 8 Tf
+1 0 0 1 42 609.39 Tm
+(artifacts/flakes) Tj
+/F3 8 Tf
+1 0 0 1 42 599.39 Tm
+(artifacts/analytics) Tj
+/F3 8 Tf
+1 0 0 1 42 589.39 Tm
+(artifacts/security) Tj
+/F3 8 Tf
+1 0 0 1 42 579.39 Tm
+(artifacts/validator) Tj
+/F3 8 Tf
+1 0 0 1 42 569.39 Tm
+(artifacts/registry-snapshots) Tj
+/F1 10 Tf
+1 0 0 1 42 552.89 Tm
+(Artifacts are evidence. They show what the framework understood, planned, generated,) Tj
+/F1 10 Tf
+1 0 0 1 42 539.89 Tm
+(executed, and learned.) Tj
+/F1 10 Tf
+1 0 0 1 42 520.39 Tm
+(---) Tj
+/F2 16 Tf
+1 0 0 1 42 500.89 Tm
+(5. Spec Driven AI Workflow) Tj
+/F1 10 Tf
+1 0 0 1 42 473.39 Tm
+(Spec-driven means tests start from a source specification, not from random code.) Tj
+/F1 10 Tf
+1 0 0 1 42 453.89 Tm
+(Supported inputs:) Tj
+/F1 10 Tf
+1 0 0 1 42 434.39 Tm
+(- OpenAPI YAML/JSON) Tj
+/F1 10 Tf
+1 0 0 1 42 421.39 Tm
+(- Story markdown) Tj
+/F1 10 Tf
+1 0 0 1 42 408.39 Tm
+(- Jira markdown/JSON) Tj
+/F1 10 Tf
+1 0 0 1 42 395.39 Tm
+(- User instruction snapshot) Tj
+/F1 10 Tf
+1 0 0 1 42 382.39 Tm
+(- Screenshot image or metadata) Tj
+/F1 10 Tf
+1 0 0 1 42 362.89 Tm
+(The AI/spec workflow is:) Tj
+/F3 8 Tf
+1 0 0 1 42 343.39 Tm
+(Raw input) Tj
+/F3 8 Tf
+1 0 0 1 42 333.39 Tm
+(  -> normalized JSON) Tj
+/F3 8 Tf
+1 0 0 1 42 323.39 Tm
+(  -> manifest candidate) Tj
+/F3 8 Tf
+1 0 0 1 42 313.39 Tm
+(  -> active manifest) Tj
+/F3 8 Tf
+1 0 0 1 42 303.39 Tm
+(  -> change plan) Tj
+/F3 8 Tf
+1 0 0 1 42 293.39 Tm
+(  -> generated/reused test) Tj
+/F3 8 Tf
+1 0 0 1 42 283.39 Tm
+(  -> registry sync) Tj
+/F3 8 Tf
+1 0 0 1 42 273.39 Tm
+(  -> validation) Tj
+/F3 8 Tf
+1 0 0 1 42 263.39 Tm
+(  -> execution) Tj
+/F3 8 Tf
+1 0 0 1 42 253.39 Tm
+(  -> feedback loop) Tj
+/F2 12 Tf
+1 0 0 1 42 236.89 Tm
+(Example Story Input) Tj
+/F3 8 Tf
+1 0 0 1 42 214.39 Tm
+(specs/stories/story-test-automation-playground.md) Tj
+/F1 10 Tf
+1 0 0 1 42 197.89 Tm
+(Example content:) Tj
+/F3 8 Tf
+1 0 0 1 42 178.39 Tm
+(As a test automation engineer, I want the Test Automation Playground home page to load) Tj
+/F3 8 Tf
+1 0 0 1 42 168.39 Tm
+(so that UI scenarios can be generated from stable practice flows.) Tj
+/F2 12 Tf
+1 0 0 1 42 151.89 Tm
+(Step 1: Normalize) Tj
+/F1 10 Tf
+1 0 0 1 42 129.39 Tm
+(Script:) Tj
+/F3 8 Tf
+1 0 0 1 42 109.88999999999999 Tm
+(scripts/normalize-story.mjs) Tj
+/F1 10 Tf
+1 0 0 1 42 93.38999999999999 Tm
+(Outputs:) Tj
+/F3 8 Tf
+1 0 0 1 42 73.88999999999999 Tm
+(artifacts/normalized-input/story-normalized.json) Tj
+/F3 8 Tf
+1 0 0 1 42 63.889999999999986 Tm
+(artifacts/manifests/story-manifest-candidates.json) Tj
+/F1 10 Tf
+1 0 0 1 42 47.389999999999986 Tm
+(Normalized JSON means:) Tj
+ET
+endstream
+endobj
+15 0 obj
+<<
+/Length 3209
+>>
+stream
+BT
+/F3 8 Tf
+1 0 0 1 42 799.89 Tm
+(What did the framework understand from the story?) Tj
+/F1 10 Tf
+1 0 0 1 42 783.39 Tm
+(Manifest candidate means:) Tj
+/F3 8 Tf
+1 0 0 1 42 763.89 Tm
+(What test scenario could be created from that understanding?) Tj
+/F2 12 Tf
+1 0 0 1 42 747.39 Tm
+(Step 2: Promote) Tj
+/F1 10 Tf
+1 0 0 1 42 724.89 Tm
+(Script:) Tj
+/F3 8 Tf
+1 0 0 1 42 705.39 Tm
+(scripts/promote-manifest-candidates.mjs) Tj
+/F1 10 Tf
+1 0 0 1 42 688.89 Tm
+(Output:) Tj
+/F3 8 Tf
+1 0 0 1 42 669.39 Tm
+(src/ai/manifests/*.json) Tj
+/F3 8 Tf
+1 0 0 1 42 659.39 Tm
+(artifacts/plans/manifest-promotion-summary.json) Tj
+/F1 10 Tf
+1 0 0 1 42 642.89 Tm
+(Important difference:) Tj
+/F3 8 Tf
+1 0 0 1 42 623.39 Tm
+(artifacts/manifests = draft candidates) Tj
+/F3 8 Tf
+1 0 0 1 42 613.39 Tm
+(src/ai/manifests = active manifests used for generation) Tj
+/F2 12 Tf
+1 0 0 1 42 596.89 Tm
+(Step 3: Plan) Tj
+/F1 10 Tf
+1 0 0 1 42 574.39 Tm
+(Script:) Tj
+/F3 8 Tf
+1 0 0 1 42 554.89 Tm
+(scripts/plan-changes.mjs) Tj
+/F1 10 Tf
+1 0 0 1 42 538.39 Tm
+(Output:) Tj
+/F3 8 Tf
+1 0 0 1 42 518.89 Tm
+(artifacts/plans/change-plan.json) Tj
+/F1 10 Tf
+1 0 0 1 42 502.39 Tm
+(The plan decides:) Tj
+/F3 8 Tf
+1 0 0 1 42 482.89 Tm
+(create - new generated test needed) Tj
+/F3 8 Tf
+1 0 0 1 42 472.89 Tm
+(update - generated test can be regenerated) Tj
+/F3 8 Tf
+1 0 0 1 42 462.89 Tm
+(reuse  - manual/framework-owned test exists, do not overwrite) Tj
+/F3 8 Tf
+1 0 0 1 42 452.89 Tm
+(stale  - registry has a scenario but no matching manifest) Tj
+/F3 8 Tf
+1 0 0 1 42 442.89 Tm
+(broken - manifest, registry, and files disagree) Tj
+/F1 10 Tf
+1 0 0 1 42 426.39 Tm
+(Manifest says what should exist. Plan decides what is safe to change.) Tj
+/F2 12 Tf
+1 0 0 1 42 406.89 Tm
+(Step 4: Generate) Tj
+/F1 10 Tf
+1 0 0 1 42 384.39 Tm
+(Script:) Tj
+/F3 8 Tf
+1 0 0 1 42 364.89 Tm
+(scripts/generate-from-manifests.mjs) Tj
+/F1 10 Tf
+1 0 0 1 42 348.39 Tm
+(Outputs:) Tj
+/F3 8 Tf
+1 0 0 1 42 328.89 Tm
+(tests/ui/**/*.spec.ts) Tj
+/F3 8 Tf
+1 0 0 1 42 318.89 Tm
+(tests/api/**/*.spec.ts) Tj
+/F3 8 Tf
+1 0 0 1 42 308.89 Tm
+(tests/hybrid/**/*.spec.ts) Tj
+/F3 8 Tf
+1 0 0 1 42 298.89 Tm
+(artifacts/generated/generation-summary.json) Tj
+/F1 10 Tf
+1 0 0 1 42 282.39 Tm
+(Generated tests are marked:) Tj
+/F3 8 Tf
+1 0 0 1 42 262.89 Tm
+(// AUTO-GENERATED by manifest generator. Do not edit directly.) Tj
+/F3 8 Tf
+1 0 0 1 42 252.89 Tm
+(// scenarioId: API_USERS_GET_001) Tj
+/F3 8 Tf
+1 0 0 1 42 242.89 Tm
+(// sourceRef: dummyjson-users.yaml#getUsers) Tj
+/F1 10 Tf
+1 0 0 1 42 226.39 Tm
+(Manual tests without this header are protected.) Tj
+/F2 12 Tf
+1 0 0 1 42 206.89 Tm
+(Step 5: Registry) Tj
+/F1 10 Tf
+1 0 0 1 42 184.39 Tm
+(Script:) Tj
+/F3 8 Tf
+1 0 0 1 42 164.89 Tm
+(scripts/sync-registry.mjs) Tj
+/F1 10 Tf
+1 0 0 1 42 148.39 Tm
+(Updates:) Tj
+/F3 8 Tf
+1 0 0 1 42 128.89 Tm
+(src/ai/registry/test-registry.json) Tj
+/F1 10 Tf
+1 0 0 1 42 112.38999999999999 Tm
+(Registry remembers:) Tj
+/F3 8 Tf
+1 0 0 1 42 92.88999999999999 Tm
+(scenarioId) Tj
+/F3 8 Tf
+1 0 0 1 42 82.88999999999999 Tm
+(sourceRef) Tj
+/F3 8 Tf
+1 0 0 1 42 72.88999999999999 Tm
+(filePath) Tj
+/F3 8 Tf
+1 0 0 1 42 62.889999999999986 Tm
+(layer) Tj
+/F3 8 Tf
+1 0 0 1 42 52.889999999999986 Tm
+(owner) Tj
+/F3 8 Tf
+1 0 0 1 42 42.889999999999986 Tm
+(generatedBy) Tj
+ET
+endstream
+endobj
+17 0 obj
+<<
+/Length 3408
+>>
+stream
+BT
+/F3 8 Tf
+1 0 0 1 42 799.89 Tm
+(lastValidatedAt) Tj
+/F3 8 Tf
+1 0 0 1 42 789.89 Tm
+(lastExecutedAt) Tj
+/F3 8 Tf
+1 0 0 1 42 779.89 Tm
+(lastStatus) Tj
+/F3 8 Tf
+1 0 0 1 42 769.89 Tm
+(healingHistory) Tj
+/F2 12 Tf
+1 0 0 1 42 753.39 Tm
+(Step 6: Validation) Tj
+/F1 10 Tf
+1 0 0 1 42 730.89 Tm
+(Command:) Tj
+/F3 8 Tf
+1 0 0 1 42 711.39 Tm
+(npm run validate) Tj
+/F1 10 Tf
+1 0 0 1 42 694.89 Tm
+(It runs:) Tj
+/F3 8 Tf
+1 0 0 1 42 675.39 Tm
+(typecheck) Tj
+/F3 8 Tf
+1 0 0 1 42 665.39 Tm
+(validate manifests) Tj
+/F3 8 Tf
+1 0 0 1 42 655.39 Tm
+(check registry) Tj
+/F3 8 Tf
+1 0 0 1 42 645.39 Tm
+(validate framework governance) Tj
+/F3 8 Tf
+1 0 0 1 42 635.39 Tm
+(validate secrets) Tj
+/F2 12 Tf
+1 0 0 1 42 618.89 Tm
+(Step 7: Execution And Feedback) Tj
+/F1 10 Tf
+1 0 0 1 42 596.39 Tm
+(After Playwright runs, the framework produces:) Tj
+/F3 8 Tf
+1 0 0 1 42 576.89 Tm
+(artifacts/reports/results.json) Tj
+/F3 8 Tf
+1 0 0 1 42 566.89 Tm
+(artifacts/reports/results.md) Tj
+/F3 8 Tf
+1 0 0 1 42 556.89 Tm
+(artifacts/healing/failure-classification.json) Tj
+/F3 8 Tf
+1 0 0 1 42 546.89 Tm
+(artifacts/healing/healing-plan.json) Tj
+/F3 8 Tf
+1 0 0 1 42 536.89 Tm
+(artifacts/flakes/flake-analysis.json) Tj
+/F3 8 Tf
+1 0 0 1 42 526.89 Tm
+(artifacts/analytics/execution-analytics.json) Tj
+/F1 10 Tf
+1 0 0 1 42 510.39 Tm
+(This is the feedback loop.) Tj
+/F1 10 Tf
+1 0 0 1 42 490.89 Tm
+(---) Tj
+/F2 16 Tf
+1 0 0 1 42 471.39 Tm
+(6. Flow Diagram) Tj
+/F3 8 Tf
+1 0 0 1 42 443.89 Tm
+(specs/) Tj
+/F3 8 Tf
+1 0 0 1 42 433.89 Tm
+(  |) Tj
+/F3 8 Tf
+1 0 0 1 42 423.89 Tm
+(  | raw source input) Tj
+/F3 8 Tf
+1 0 0 1 42 413.89 Tm
+(  v) Tj
+/F3 8 Tf
+1 0 0 1 42 403.89 Tm
+(scripts/normalize-*.mjs) Tj
+/F3 8 Tf
+1 0 0 1 42 393.89 Tm
+(  |) Tj
+/F3 8 Tf
+1 0 0 1 42 383.89 Tm
+(  | creates normalized JSON and candidates) Tj
+/F3 8 Tf
+1 0 0 1 42 373.89 Tm
+(  v) Tj
+/F3 8 Tf
+1 0 0 1 42 363.89 Tm
+(artifacts/normalized-input/*.json) Tj
+/F3 8 Tf
+1 0 0 1 42 353.89 Tm
+(artifacts/manifests/*-manifest-candidates.json) Tj
+/F3 8 Tf
+1 0 0 1 42 343.89 Tm
+(  |) Tj
+/F3 8 Tf
+1 0 0 1 42 333.89 Tm
+(  | promote candidates) Tj
+/F3 8 Tf
+1 0 0 1 42 323.89 Tm
+(  v) Tj
+/F3 8 Tf
+1 0 0 1 42 313.89 Tm
+(src/ai/manifests/*.json) Tj
+/F3 8 Tf
+1 0 0 1 42 303.89 Tm
+(  |) Tj
+/F3 8 Tf
+1 0 0 1 42 293.89 Tm
+(  | plan safe file changes) Tj
+/F3 8 Tf
+1 0 0 1 42 283.89 Tm
+(  v) Tj
+/F3 8 Tf
+1 0 0 1 42 273.89 Tm
+(artifacts/plans/change-plan.json) Tj
+/F3 8 Tf
+1 0 0 1 42 263.89 Tm
+(  |) Tj
+/F3 8 Tf
+1 0 0 1 42 253.89 Tm
+(  | generate tests) Tj
+/F3 8 Tf
+1 0 0 1 42 243.89 Tm
+(  v) Tj
+/F3 8 Tf
+1 0 0 1 42 233.89 Tm
+(tests/**/*.spec.ts) Tj
+/F3 8 Tf
+1 0 0 1 42 223.89 Tm
+(  |) Tj
+/F3 8 Tf
+1 0 0 1 42 213.89 Tm
+(  | sync traceability) Tj
+/F3 8 Tf
+1 0 0 1 42 203.89 Tm
+(  v) Tj
+/F3 8 Tf
+1 0 0 1 42 193.89 Tm
+(src/ai/registry/test-registry.json) Tj
+/F3 8 Tf
+1 0 0 1 42 183.89 Tm
+(  |) Tj
+/F3 8 Tf
+1 0 0 1 42 173.89 Tm
+(  | validate and execute) Tj
+/F3 8 Tf
+1 0 0 1 42 163.89 Tm
+(  v) Tj
+/F3 8 Tf
+1 0 0 1 42 153.89 Tm
+(artifacts/reports/results.json) Tj
+/F3 8 Tf
+1 0 0 1 42 143.89 Tm
+(  |) Tj
+/F3 8 Tf
+1 0 0 1 42 133.89 Tm
+(  | learn from execution) Tj
+/F3 8 Tf
+1 0 0 1 42 123.88999999999999 Tm
+(  v) Tj
+/F3 8 Tf
+1 0 0 1 42 113.88999999999999 Tm
+(artifacts/healing) Tj
+/F3 8 Tf
+1 0 0 1 42 103.88999999999999 Tm
+(artifacts/flakes) Tj
+/F3 8 Tf
+1 0 0 1 42 93.88999999999999 Tm
+(artifacts/analytics) Tj
+/F1 10 Tf
+1 0 0 1 42 77.38999999999999 Tm
+(---) Tj
+/F2 16 Tf
+1 0 0 1 42 57.889999999999986 Tm
+(7. Complete UI Flow) Tj
+ET
+endstream
+endobj
+19 0 obj
+<<
+/Length 4243
+>>
+stream
+BT
+/F1 10 Tf
+1 0 0 1 42 799.89 Tm
+(UI flow in this framework:) Tj
+/F3 8 Tf
+1 0 0 1 42 780.39 Tm
+(UI test file) Tj
+/F3 8 Tf
+1 0 0 1 42 770.39 Tm
+(  -> base fixture) Tj
+/F3 8 Tf
+1 0 0 1 42 760.39 Tm
+(  -> page object) Tj
+/F3 8 Tf
+1 0 0 1 42 750.39 Tm
+(  -> component object) Tj
+/F3 8 Tf
+1 0 0 1 42 740.39 Tm
+(  -> Playwright browser action) Tj
+/F3 8 Tf
+1 0 0 1 42 730.39 Tm
+(  -> assertion) Tj
+/F2 12 Tf
+1 0 0 1 42 713.89 Tm
+(UI Flow Diagram) Tj
+/F3 8 Tf
+1 0 0 1 42 691.39 Tm
+(tests/ui/smoke/playground-home.smoke.spec.ts) Tj
+/F3 8 Tf
+1 0 0 1 42 681.39 Tm
+(  |) Tj
+/F3 8 Tf
+1 0 0 1 42 671.39 Tm
+(  v) Tj
+/F3 8 Tf
+1 0 0 1 42 661.39 Tm
+(src/fixtures/base.fixture.ts) Tj
+/F3 8 Tf
+1 0 0 1 42 651.39 Tm
+(  |) Tj
+/F3 8 Tf
+1 0 0 1 42 641.39 Tm
+(  | provides playgroundPage) Tj
+/F3 8 Tf
+1 0 0 1 42 631.39 Tm
+(  v) Tj
+/F3 8 Tf
+1 0 0 1 42 621.39 Tm
+(src/pages/app/test-automation-playground.page.ts) Tj
+/F3 8 Tf
+1 0 0 1 42 611.39 Tm
+(  |) Tj
+/F3 8 Tf
+1 0 0 1 42 601.39 Tm
+(  | calls reusable component classes) Tj
+/F3 8 Tf
+1 0 0 1 42 591.39 Tm
+(  v) Tj
+/F3 8 Tf
+1 0 0 1 42 581.39 Tm
+(src/components/*.component.ts) Tj
+/F3 8 Tf
+1 0 0 1 42 571.39 Tm
+(  |) Tj
+/F3 8 Tf
+1 0 0 1 42 561.39 Tm
+(  v) Tj
+/F3 8 Tf
+1 0 0 1 42 551.39 Tm
+(Playwright Page / Locator APIs) Tj
+/F2 12 Tf
+1 0 0 1 42 534.89 Tm
+(UI Test Example) Tj
+/F3 8 Tf
+1 0 0 1 42 512.39 Tm
+(import { test, expect } from '@fixtures/base.fixture';) Tj
+/F3 8 Tf
+1 0 0 1 42 502.39 Tm
+() Tj
+/F3 8 Tf
+1 0 0 1 42 492.39 Tm
+(test.describe\('@ui @smoke test automation playground', \(\) => {) Tj
+/F3 8 Tf
+1 0 0 1 42 482.39 Tm
+(test\('[ui] UI_PLAYGROUND_HOME_001 - playground home loads', async \({ playgroundPage, page }\) =>) Tj
+/F3 8 Tf
+1 0 0 1 42 472.39 Tm
+({) Tj
+/F3 8 Tf
+1 0 0 1 42 462.39 Tm
+(    await playgroundPage.open\(\);) Tj
+/F3 8 Tf
+1 0 0 1 42 452.39 Tm
+(    await playgroundPage.expectLoaded\(\);) Tj
+/F3 8 Tf
+1 0 0 1 42 442.39 Tm
+() Tj
+/F3 8 Tf
+1 0 0 1 42 432.39 Tm
+(    await expect\(page.locator\('body'\)\).toContainText\(/test|automation|playground/i\);) Tj
+/F3 8 Tf
+1 0 0 1 42 422.39 Tm
+(  }\);) Tj
+/F3 8 Tf
+1 0 0 1 42 412.39 Tm
+(}\);) Tj
+/F2 12 Tf
+1 0 0 1 42 395.89 Tm
+(Fixture Example) Tj
+/F3 8 Tf
+1 0 0 1 42 373.39 Tm
+(playgroundPage: async \({ page }, use\) => {) Tj
+/F3 8 Tf
+1 0 0 1 42 363.39 Tm
+(  await use\(new TestAutomationPlaygroundPage\(page\)\);) Tj
+/F3 8 Tf
+1 0 0 1 42 353.39 Tm
+(}) Tj
+/F1 10 Tf
+1 0 0 1 42 336.89 Tm
+(The test does not create the page object manually. The fixture gives it.) Tj
+/F2 12 Tf
+1 0 0 1 42 317.39 Tm
+(Page Object Example) Tj
+/F3 8 Tf
+1 0 0 1 42 294.89 Tm
+(export class TestAutomationPlaygroundPage extends BasePage {) Tj
+/F3 8 Tf
+1 0 0 1 42 284.89 Tm
+(  readonly dialogs: BrowserDialogsComponent;) Tj
+/F3 8 Tf
+1 0 0 1 42 274.89 Tm
+(  readonly files: FileOperationsComponent;) Tj
+/F3 8 Tf
+1 0 0 1 42 264.89 Tm
+() Tj
+/F3 8 Tf
+1 0 0 1 42 254.89 Tm
+(  constructor\(page: Page\) {) Tj
+/F3 8 Tf
+1 0 0 1 42 244.89 Tm
+(    super\(page\);) Tj
+/F3 8 Tf
+1 0 0 1 42 234.89 Tm
+(    this.dialogs = new BrowserDialogsComponent\(page\);) Tj
+/F3 8 Tf
+1 0 0 1 42 224.89 Tm
+(    this.files = new FileOperationsComponent\(page\);) Tj
+/F3 8 Tf
+1 0 0 1 42 214.89 Tm
+(  }) Tj
+/F3 8 Tf
+1 0 0 1 42 204.89 Tm
+() Tj
+/F3 8 Tf
+1 0 0 1 42 194.89 Tm
+(  async open\(\): Promise<void> {) Tj
+/F3 8 Tf
+1 0 0 1 42 184.89 Tm
+(    await this.page.goto\('/', { waitUntil: 'commit' }\);) Tj
+/F3 8 Tf
+1 0 0 1 42 174.89 Tm
+(  }) Tj
+/F3 8 Tf
+1 0 0 1 42 164.89 Tm
+() Tj
+/F3 8 Tf
+1 0 0 1 42 154.89 Tm
+(  async verifyAlerts\(\): Promise<void> {) Tj
+/F3 8 Tf
+1 0 0 1 42 144.89 Tm
+(    await this.openArea\('alerts'\);) Tj
+/F3 8 Tf
+1 0 0 1 42 134.89 Tm
+(    await this.expectAreaTitle\('Alerts Testing'\);) Tj
+/F3 8 Tf
+1 0 0 1 42 124.88999999999999 Tm
+() Tj
+/F3 8 Tf
+1 0 0 1 42 114.88999999999999 Tm
+(    const message = await this.dialogs.acceptAlert\(async \(\) => {) Tj
+/F3 8 Tf
+1 0 0 1 42 104.88999999999999 Tm
+(      await this.page.locator\('#alert-btn'\).click\({ noWaitAfter: true }\);) Tj
+/F3 8 Tf
+1 0 0 1 42 94.88999999999999 Tm
+(    }\);) Tj
+/F3 8 Tf
+1 0 0 1 42 84.88999999999999 Tm
+() Tj
+/F3 8 Tf
+1 0 0 1 42 74.88999999999999 Tm
+(    expect\(message.length\).toBeGreaterThan\(0\);) Tj
+/F3 8 Tf
+1 0 0 1 42 64.88999999999999 Tm
+(  }) Tj
+/F3 8 Tf
+1 0 0 1 42 54.889999999999986 Tm
+(}) Tj
+ET
+endstream
+endobj
+21 0 obj
+<<
+/Length 3708
+>>
+stream
+BT
+/F2 12 Tf
+1 0 0 1 42 799.89 Tm
+(Component Object Example) Tj
+/F3 8 Tf
+1 0 0 1 42 777.39 Tm
+(export class BrowserDialogsComponent {) Tj
+/F3 8 Tf
+1 0 0 1 42 767.39 Tm
+(  constructor\(private readonly page: Page\) {}) Tj
+/F3 8 Tf
+1 0 0 1 42 757.39 Tm
+() Tj
+/F3 8 Tf
+1 0 0 1 42 747.39 Tm
+(  async acceptAlert\(trigger: \(\) => Promise<void>\): Promise<string> {) Tj
+/F3 8 Tf
+1 0 0 1 42 737.39 Tm
+(    const dialogPromise = this.page.waitForEvent\('dialog'\);) Tj
+/F3 8 Tf
+1 0 0 1 42 727.39 Tm
+(    const triggerPromise = trigger\(\);) Tj
+/F3 8 Tf
+1 0 0 1 42 717.39 Tm
+(    const dialog = await dialogPromise;) Tj
+/F3 8 Tf
+1 0 0 1 42 707.39 Tm
+(    const message = dialog.message\(\);) Tj
+/F3 8 Tf
+1 0 0 1 42 697.39 Tm
+(    await dialog.accept\(\);) Tj
+/F3 8 Tf
+1 0 0 1 42 687.39 Tm
+(    await triggerPromise;) Tj
+/F3 8 Tf
+1 0 0 1 42 677.39 Tm
+(    return message;) Tj
+/F3 8 Tf
+1 0 0 1 42 667.39 Tm
+(  }) Tj
+/F3 8 Tf
+1 0 0 1 42 657.39 Tm
+(}) Tj
+/F2 12 Tf
+1 0 0 1 42 640.89 Tm
+(UI Responsibility Split) Tj
+/F3 8 Tf
+1 0 0 1 42 618.39 Tm
+(Test file:) Tj
+/F3 8 Tf
+1 0 0 1 42 608.39 Tm
+(  says what scenario is being tested) Tj
+/F3 8 Tf
+1 0 0 1 42 598.39 Tm
+() Tj
+/F3 8 Tf
+1 0 0 1 42 588.39 Tm
+(Fixture:) Tj
+/F3 8 Tf
+1 0 0 1 42 578.39 Tm
+(  creates page object) Tj
+/F3 8 Tf
+1 0 0 1 42 568.39 Tm
+() Tj
+/F3 8 Tf
+1 0 0 1 42 558.39 Tm
+(Page object:) Tj
+/F3 8 Tf
+1 0 0 1 42 548.39 Tm
+(  owns page-level business flow) Tj
+/F3 8 Tf
+1 0 0 1 42 538.39 Tm
+() Tj
+/F3 8 Tf
+1 0 0 1 42 528.39 Tm
+(Component object:) Tj
+/F3 8 Tf
+1 0 0 1 42 518.39 Tm
+(  owns reusable UI operation like dialog, table, upload, widgets) Tj
+/F3 8 Tf
+1 0 0 1 42 508.39 Tm
+() Tj
+/F3 8 Tf
+1 0 0 1 42 498.39 Tm
+(Playwright:) Tj
+/F3 8 Tf
+1 0 0 1 42 488.39 Tm
+(  executes browser actions) Tj
+/F1 10 Tf
+1 0 0 1 42 471.89 Tm
+(If the application has multiple pages, create multiple page objects:) Tj
+/F3 8 Tf
+1 0 0 1 42 452.39 Tm
+(src/pages/app/login.page.ts) Tj
+/F3 8 Tf
+1 0 0 1 42 442.39 Tm
+(src/pages/app/dashboard.page.ts) Tj
+/F3 8 Tf
+1 0 0 1 42 432.39 Tm
+(src/pages/app/orders.page.ts) Tj
+/F1 10 Tf
+1 0 0 1 42 415.89 Tm
+(Then add them to:) Tj
+/F3 8 Tf
+1 0 0 1 42 396.39 Tm
+(src/fixtures/base.fixture.ts) Tj
+/F1 10 Tf
+1 0 0 1 42 379.89 Tm
+(---) Tj
+/F2 16 Tf
+1 0 0 1 42 360.39 Tm
+(8. Complete API Flow) Tj
+/F1 10 Tf
+1 0 0 1 42 332.89 Tm
+(API flow in this framework:) Tj
+/F3 8 Tf
+1 0 0 1 42 313.39 Tm
+(API test file) Tj
+/F3 8 Tf
+1 0 0 1 42 303.39 Tm
+(  -> base fixture) Tj
+/F3 8 Tf
+1 0 0 1 42 293.39 Tm
+(  -> API client) Tj
+/F3 8 Tf
+1 0 0 1 42 283.39 Tm
+(  -> ResourceClient) Tj
+/F3 8 Tf
+1 0 0 1 42 273.39 Tm
+(  -> BaseApiClient) Tj
+/F3 8 Tf
+1 0 0 1 42 263.39 Tm
+(  -> Playwright APIRequestContext) Tj
+/F3 8 Tf
+1 0 0 1 42 253.39 Tm
+(  -> response assertion) Tj
+/F2 12 Tf
+1 0 0 1 42 236.89 Tm
+(API Flow Diagram) Tj
+/F3 8 Tf
+1 0 0 1 42 214.39 Tm
+(tests/api/smoke/users.smoke.spec.ts) Tj
+/F3 8 Tf
+1 0 0 1 42 204.39 Tm
+(  |) Tj
+/F3 8 Tf
+1 0 0 1 42 194.39 Tm
+(  v) Tj
+/F3 8 Tf
+1 0 0 1 42 184.39 Tm
+(src/fixtures/base.fixture.ts) Tj
+/F3 8 Tf
+1 0 0 1 42 174.39 Tm
+(  |) Tj
+/F3 8 Tf
+1 0 0 1 42 164.39 Tm
+(  | provides usersClient) Tj
+/F3 8 Tf
+1 0 0 1 42 154.39 Tm
+(  v) Tj
+/F3 8 Tf
+1 0 0 1 42 144.39 Tm
+(src/api/clients/users.client.ts) Tj
+/F3 8 Tf
+1 0 0 1 42 134.39 Tm
+(  |) Tj
+/F3 8 Tf
+1 0 0 1 42 124.38999999999999 Tm
+(  v) Tj
+/F3 8 Tf
+1 0 0 1 42 114.38999999999999 Tm
+(src/api/core/resource.client.ts) Tj
+/F3 8 Tf
+1 0 0 1 42 104.38999999999999 Tm
+(  |) Tj
+/F3 8 Tf
+1 0 0 1 42 94.38999999999999 Tm
+(  v) Tj
+/F3 8 Tf
+1 0 0 1 42 84.38999999999999 Tm
+(src/api/core/base-api.client.ts) Tj
+/F3 8 Tf
+1 0 0 1 42 74.38999999999999 Tm
+(  |) Tj
+/F3 8 Tf
+1 0 0 1 42 64.38999999999999 Tm
+(  v) Tj
+/F3 8 Tf
+1 0 0 1 42 54.389999999999986 Tm
+(Playwright APIRequestContext) Tj
+ET
+endstream
+endobj
+23 0 obj
+<<
+/Length 4706
+>>
+stream
+BT
+/F2 12 Tf
+1 0 0 1 42 799.89 Tm
+(API Test Example) Tj
+/F3 8 Tf
+1 0 0 1 42 777.39 Tm
+(import { test, expect } from '@fixtures/base.fixture';) Tj
+/F3 8 Tf
+1 0 0 1 42 767.39 Tm
+(import { pagedUsersSchema } from '@api/contracts/dummyjson.contracts';) Tj
+/F3 8 Tf
+1 0 0 1 42 757.39 Tm
+(import { expectJsonResponse } from '@utils/assertions';) Tj
+/F3 8 Tf
+1 0 0 1 42 747.39 Tm
+(import { expectToMatchSchema } from '@utils/api-contract';) Tj
+/F3 8 Tf
+1 0 0 1 42 737.39 Tm
+() Tj
+/F3 8 Tf
+1 0 0 1 42 727.39 Tm
+(test.describe\('@api @smoke users', \(\) => {) Tj
+/F3 8 Tf
+1 0 0 1 42 717.39 Tm
+(test\('[api] API_USERS_GET_001 - list /users matches source contract', async \({ usersClient }\)) Tj
+/F3 8 Tf
+1 0 0 1 42 707.39 Tm
+(=> {) Tj
+/F3 8 Tf
+1 0 0 1 42 697.39 Tm
+(    const response = await usersClient.list\({ limit: 10 }\);) Tj
+/F3 8 Tf
+1 0 0 1 42 687.39 Tm
+(    await expectJsonResponse\(response, 200\);) Tj
+/F3 8 Tf
+1 0 0 1 42 677.39 Tm
+() Tj
+/F3 8 Tf
+1 0 0 1 42 667.39 Tm
+(    const body = await response.json\(\);) Tj
+/F3 8 Tf
+1 0 0 1 42 657.39 Tm
+(    expectToMatchSchema\(body, pagedUsersSchema\);) Tj
+/F3 8 Tf
+1 0 0 1 42 647.39 Tm
+(    expect\(Array.isArray\(body.users\)\).toBe\(true\);) Tj
+/F3 8 Tf
+1 0 0 1 42 637.39 Tm
+(    expect\(body.users.length\).toBeGreaterThan\(0\);) Tj
+/F3 8 Tf
+1 0 0 1 42 627.39 Tm
+(  }\);) Tj
+/F3 8 Tf
+1 0 0 1 42 617.39 Tm
+(}\);) Tj
+/F2 12 Tf
+1 0 0 1 42 600.89 Tm
+(API Fixture Example) Tj
+/F3 8 Tf
+1 0 0 1 42 578.39 Tm
+(apiContext: async \({ runtime }, use\) => {) Tj
+/F3 8 Tf
+1 0 0 1 42 568.39 Tm
+(  const apiContext = await request.newContext\({) Tj
+/F3 8 Tf
+1 0 0 1 42 558.39 Tm
+(    baseURL: runtime.apiBaseUrl,) Tj
+/F3 8 Tf
+1 0 0 1 42 548.39 Tm
+(    timeout: runtime.requestTimeoutMs,) Tj
+/F3 8 Tf
+1 0 0 1 42 538.39 Tm
+(    extraHTTPHeaders: {) Tj
+/F3 8 Tf
+1 0 0 1 42 528.39 Tm
+(      'Content-Type': 'application/json') Tj
+/F3 8 Tf
+1 0 0 1 42 518.39 Tm
+(    }) Tj
+/F3 8 Tf
+1 0 0 1 42 508.39 Tm
+(  }\);) Tj
+/F3 8 Tf
+1 0 0 1 42 498.39 Tm
+() Tj
+/F3 8 Tf
+1 0 0 1 42 488.39 Tm
+(  await use\(apiContext\);) Tj
+/F3 8 Tf
+1 0 0 1 42 478.39 Tm
+(  await apiContext.dispose\(\);) Tj
+/F3 8 Tf
+1 0 0 1 42 468.39 Tm
+(},) Tj
+/F3 8 Tf
+1 0 0 1 42 458.39 Tm
+() Tj
+/F3 8 Tf
+1 0 0 1 42 448.39 Tm
+(usersClient: async \({ apiContext }, use\) => {) Tj
+/F3 8 Tf
+1 0 0 1 42 438.39 Tm
+(  await use\(new UsersClient\(apiContext\)\);) Tj
+/F3 8 Tf
+1 0 0 1 42 428.39 Tm
+(}) Tj
+/F2 12 Tf
+1 0 0 1 42 411.89 Tm
+(Users Client Example) Tj
+/F3 8 Tf
+1 0 0 1 42 389.39 Tm
+(export class UsersClient extends ResourceClient {) Tj
+/F3 8 Tf
+1 0 0 1 42 379.39 Tm
+(  constructor\(request: APIRequestContext\) {) Tj
+/F3 8 Tf
+1 0 0 1 42 369.39 Tm
+(    super\('/users', request\);) Tj
+/F3 8 Tf
+1 0 0 1 42 359.39 Tm
+(  }) Tj
+/F3 8 Tf
+1 0 0 1 42 349.39 Tm
+() Tj
+/F3 8 Tf
+1 0 0 1 42 339.39 Tm
+(  async list\(query: PageQuery | number = { limit: 10 }\): Promise<APIResponse> {) Tj
+/F3 8 Tf
+1 0 0 1 42 329.39 Tm
+(    return typeof query === 'number' ? super.list\({ limit: query }\) : super.list\(query\);) Tj
+/F3 8 Tf
+1 0 0 1 42 319.39 Tm
+(  }) Tj
+/F3 8 Tf
+1 0 0 1 42 309.39 Tm
+(}) Tj
+/F2 12 Tf
+1 0 0 1 42 292.89 Tm
+(Resource Client Example) Tj
+/F3 8 Tf
+1 0 0 1 42 270.39 Tm
+(export abstract class ResourceClient extends BaseApiClient {) Tj
+/F3 8 Tf
+1 0 0 1 42 260.39 Tm
+(protected constructor\(protected readonly resourcePath: string, requestContext:) Tj
+/F3 8 Tf
+1 0 0 1 42 250.39 Tm
+(APIRequestContext\) {) Tj
+/F3 8 Tf
+1 0 0 1 42 240.39 Tm
+(    super\(requestContext\);) Tj
+/F3 8 Tf
+1 0 0 1 42 230.39 Tm
+(  }) Tj
+/F3 8 Tf
+1 0 0 1 42 220.39 Tm
+() Tj
+/F3 8 Tf
+1 0 0 1 42 210.39 Tm
+(  list\(query: PageQuery = {}\): Promise<APIResponse> {) Tj
+/F3 8 Tf
+1 0 0 1 42 200.39 Tm
+(    return this.get\(this.resourcePath, { ...query }\);) Tj
+/F3 8 Tf
+1 0 0 1 42 190.39 Tm
+(  }) Tj
+/F3 8 Tf
+1 0 0 1 42 180.39 Tm
+() Tj
+/F3 8 Tf
+1 0 0 1 42 170.39 Tm
+(  getById\(id: number\): Promise<APIResponse> {) Tj
+/F3 8 Tf
+1 0 0 1 42 160.39 Tm
+(    return this.get\(`${this.resourcePath}/${id}`\);) Tj
+/F3 8 Tf
+1 0 0 1 42 150.39 Tm
+(  }) Tj
+/F3 8 Tf
+1 0 0 1 42 140.39 Tm
+(}) Tj
+/F2 12 Tf
+1 0 0 1 42 123.88999999999999 Tm
+(Base API Client Example) Tj
+/F3 8 Tf
+1 0 0 1 42 101.38999999999999 Tm
+(export abstract class BaseApiClient {) Tj
+/F3 8 Tf
+1 0 0 1 42 91.38999999999999 Tm
+(  protected constructor\(protected readonly request: APIRequestContext\) {}) Tj
+/F3 8 Tf
+1 0 0 1 42 81.38999999999999 Tm
+() Tj
+/F3 8 Tf
+1 0 0 1 42 71.38999999999999 Tm
+(protected get\(path: string, params?: QueryParams, headers?: Record<string, string>\):) Tj
+/F3 8 Tf
+1 0 0 1 42 61.389999999999986 Tm
+(Promise<APIResponse> {) Tj
+/F3 8 Tf
+1 0 0 1 42 51.389999999999986 Tm
+(    return this.request.get\(path, { params: this.cleanParams\(params\), headers }\);) Tj
+ET
+endstream
+endobj
+25 0 obj
+<<
+/Length 3382
+>>
+stream
+BT
+/F3 8 Tf
+1 0 0 1 42 799.89 Tm
+(  }) Tj
+/F3 8 Tf
+1 0 0 1 42 789.89 Tm
+(}) Tj
+/F2 12 Tf
+1 0 0 1 42 773.39 Tm
+(API Responsibility Split) Tj
+/F3 8 Tf
+1 0 0 1 42 750.89 Tm
+(Test:) Tj
+/F3 8 Tf
+1 0 0 1 42 740.89 Tm
+(  validates scenario) Tj
+/F3 8 Tf
+1 0 0 1 42 730.89 Tm
+() Tj
+/F3 8 Tf
+1 0 0 1 42 720.89 Tm
+(Fixture:) Tj
+/F3 8 Tf
+1 0 0 1 42 710.89 Tm
+(  creates API context and clients) Tj
+/F3 8 Tf
+1 0 0 1 42 700.89 Tm
+() Tj
+/F3 8 Tf
+1 0 0 1 42 690.89 Tm
+(Domain client:) Tj
+/F3 8 Tf
+1 0 0 1 42 680.89 Tm
+(  exposes business API methods like usersClient.list\(\)) Tj
+/F3 8 Tf
+1 0 0 1 42 670.89 Tm
+() Tj
+/F3 8 Tf
+1 0 0 1 42 660.89 Tm
+(ResourceClient:) Tj
+/F3 8 Tf
+1 0 0 1 42 650.89 Tm
+(  owns common REST actions like list, getById, create, update, delete) Tj
+/F3 8 Tf
+1 0 0 1 42 640.89 Tm
+() Tj
+/F3 8 Tf
+1 0 0 1 42 630.89 Tm
+(BaseApiClient:) Tj
+/F3 8 Tf
+1 0 0 1 42 620.89 Tm
+(  owns low-level HTTP get, post, put, patch, delete) Tj
+/F3 8 Tf
+1 0 0 1 42 610.89 Tm
+() Tj
+/F3 8 Tf
+1 0 0 1 42 600.89 Tm
+(APIRequestContext:) Tj
+/F3 8 Tf
+1 0 0 1 42 590.89 Tm
+(  executes actual HTTP request) Tj
+/F1 10 Tf
+1 0 0 1 42 574.39 Tm
+(For ecommerce, examples would be:) Tj
+/F3 8 Tf
+1 0 0 1 42 554.89 Tm
+(OrdersClient) Tj
+/F3 8 Tf
+1 0 0 1 42 544.89 Tm
+(PaymentsClient) Tj
+/F3 8 Tf
+1 0 0 1 42 534.89 Tm
+(CheckoutClient) Tj
+/F3 8 Tf
+1 0 0 1 42 524.89 Tm
+(ProductsClient) Tj
+/F3 8 Tf
+1 0 0 1 42 514.89 Tm
+(CartClient) Tj
+/F1 10 Tf
+1 0 0 1 42 498.39 Tm
+(Test chooses the client:) Tj
+/F3 8 Tf
+1 0 0 1 42 478.89 Tm
+(test\('get order by id', async \({ ordersClient }\) => {) Tj
+/F3 8 Tf
+1 0 0 1 42 468.89 Tm
+(  const response = await ordersClient.getByOrderId\(12345\);) Tj
+/F3 8 Tf
+1 0 0 1 42 458.89 Tm
+(}\);) Tj
+/F1 10 Tf
+1 0 0 1 42 442.39 Tm
+(---) Tj
+/F2 16 Tf
+1 0 0 1 42 422.89 Tm
+(9. Environment Config Flow) Tj
+/F1 10 Tf
+1 0 0 1 42 395.39 Tm
+(Environment config is handled by:) Tj
+/F3 8 Tf
+1 0 0 1 42 375.89 Tm
+(src/config/env.ts) Tj
+/F1 10 Tf
+1 0 0 1 42 359.39 Tm
+(Supported real files:) Tj
+/F3 8 Tf
+1 0 0 1 42 339.89 Tm
+(.env) Tj
+/F3 8 Tf
+1 0 0 1 42 329.89 Tm
+(.env.local) Tj
+/F3 8 Tf
+1 0 0 1 42 319.89 Tm
+(.env.qa) Tj
+/F3 8 Tf
+1 0 0 1 42 309.89 Tm
+(.env.stage) Tj
+/F1 10 Tf
+1 0 0 1 42 293.39 Tm
+(Example files:) Tj
+/F3 8 Tf
+1 0 0 1 42 273.89 Tm
+(.env.local.example) Tj
+/F3 8 Tf
+1 0 0 1 42 263.89 Tm
+(.env.qa.example) Tj
+/F3 8 Tf
+1 0 0 1 42 253.89 Tm
+(.env.stage.example) Tj
+/F1 10 Tf
+1 0 0 1 42 237.39 Tm
+(Runtime loading order:) Tj
+/F3 8 Tf
+1 0 0 1 42 217.89 Tm
+(1. Load .env) Tj
+/F3 8 Tf
+1 0 0 1 42 207.89 Tm
+(2. Resolve TEST_ENV) Tj
+/F3 8 Tf
+1 0 0 1 42 197.89 Tm
+(3. Load .env.<TEST_ENV>) Tj
+/F3 8 Tf
+1 0 0 1 42 187.89 Tm
+(4. Shell or CI variables override file values) Tj
+/F3 8 Tf
+1 0 0 1 42 177.89 Tm
+(5. Return typed RuntimeConfig) Tj
+/F1 10 Tf
+1 0 0 1 42 161.39 Tm
+(Example commands:) Tj
+/F3 8 Tf
+1 0 0 1 42 141.89 Tm
+(TEST_ENV=qa npm run test:api) Tj
+/F3 8 Tf
+1 0 0 1 42 131.89 Tm
+(npm run agentic -- --action=run --mode=ui --env=stage) Tj
+/F3 8 Tf
+1 0 0 1 42 121.88999999999999 Tm
+(npm run agentic -- --action=run --mode=api --test-env=qa) Tj
+/F2 12 Tf
+1 0 0 1 42 105.38999999999999 Tm
+(UI Config Usage) Tj
+/F3 8 Tf
+1 0 0 1 42 82.88999999999999 Tm
+(playwright.config.ts) Tj
+/F3 8 Tf
+1 0 0 1 42 72.88999999999999 Tm
+(  -> loadRuntimeConfig\(\)) Tj
+/F3 8 Tf
+1 0 0 1 42 62.889999999999986 Tm
+(  -> use.baseURL = runtime.uiBaseUrl) Tj
+/F1 10 Tf
+1 0 0 1 42 46.389999999999986 Tm
+(So this:) Tj
+ET
+endstream
+endobj
+27 0 obj
+<<
+/Length 3293
+>>
+stream
+BT
+/F3 8 Tf
+1 0 0 1 42 799.89 Tm
+(await page.goto\('/'\);) Tj
+/F1 10 Tf
+1 0 0 1 42 783.39 Tm
+(opens:) Tj
+/F3 8 Tf
+1 0 0 1 42 763.89 Tm
+(runtime.uiBaseUrl + '/') Tj
+/F2 12 Tf
+1 0 0 1 42 747.39 Tm
+(API Config Usage) Tj
+/F3 8 Tf
+1 0 0 1 42 724.89 Tm
+(base.fixture.ts) Tj
+/F3 8 Tf
+1 0 0 1 42 714.89 Tm
+(  -> runtime fixture) Tj
+/F3 8 Tf
+1 0 0 1 42 704.89 Tm
+(  -> apiContext baseURL = runtime.apiBaseUrl) Tj
+/F3 8 Tf
+1 0 0 1 42 694.89 Tm
+(  -> API clients use relative paths) Tj
+/F1 10 Tf
+1 0 0 1 42 678.39 Tm
+(So this:) Tj
+/F3 8 Tf
+1 0 0 1 42 658.89 Tm
+(await usersClient.list\({ limit: 10 }\);) Tj
+/F1 10 Tf
+1 0 0 1 42 642.39 Tm
+(calls:) Tj
+/F3 8 Tf
+1 0 0 1 42 622.89 Tm
+(runtime.apiBaseUrl + '/users?limit=10') Tj
+/F1 10 Tf
+1 0 0 1 42 606.39 Tm
+(---) Tj
+/F2 16 Tf
+1 0 0 1 42 586.89 Tm
+(10. Feedback Loop) Tj
+/F1 10 Tf
+1 0 0 1 42 559.39 Tm
+(The feedback loop starts after test execution.) Tj
+/F3 8 Tf
+1 0 0 1 42 539.89 Tm
+(Playwright results) Tj
+/F3 8 Tf
+1 0 0 1 42 529.89 Tm
+(  -> registry update) Tj
+/F3 8 Tf
+1 0 0 1 42 519.89 Tm
+(  -> failure classification) Tj
+/F3 8 Tf
+1 0 0 1 42 509.89 Tm
+(  -> healing plan) Tj
+/F3 8 Tf
+1 0 0 1 42 499.89 Tm
+(  -> flake analysis) Tj
+/F3 8 Tf
+1 0 0 1 42 489.89 Tm
+(  -> execution analytics) Tj
+/F3 8 Tf
+1 0 0 1 42 479.89 Tm
+(  -> markdown reports) Tj
+/F1 10 Tf
+1 0 0 1 42 463.39 Tm
+(Scripts:) Tj
+/F3 8 Tf
+1 0 0 1 42 443.89 Tm
+(scripts/update-registry-from-results.mjs) Tj
+/F3 8 Tf
+1 0 0 1 42 433.89 Tm
+(scripts/classify-failures.mjs) Tj
+/F3 8 Tf
+1 0 0 1 42 423.89 Tm
+(scripts/heal-failures.mjs) Tj
+/F3 8 Tf
+1 0 0 1 42 413.89 Tm
+(scripts/analyze-flakes.mjs) Tj
+/F3 8 Tf
+1 0 0 1 42 403.89 Tm
+(scripts/generate-execution-analytics.mjs) Tj
+/F3 8 Tf
+1 0 0 1 42 393.89 Tm
+(scripts/generate-md-report.mjs) Tj
+/F1 10 Tf
+1 0 0 1 42 377.39 Tm
+(Outputs:) Tj
+/F3 8 Tf
+1 0 0 1 42 357.89 Tm
+(src/ai/registry/test-registry.json) Tj
+/F3 8 Tf
+1 0 0 1 42 347.89 Tm
+(artifacts/execution/execution-registry-update.json) Tj
+/F3 8 Tf
+1 0 0 1 42 337.89 Tm
+(artifacts/healing/failure-classification.json) Tj
+/F3 8 Tf
+1 0 0 1 42 327.89 Tm
+(artifacts/healing/healing-plan.json) Tj
+/F3 8 Tf
+1 0 0 1 42 317.89 Tm
+(artifacts/flakes/flake-analysis.json) Tj
+/F3 8 Tf
+1 0 0 1 42 307.89 Tm
+(artifacts/analytics/execution-analytics.json) Tj
+/F3 8 Tf
+1 0 0 1 42 297.89 Tm
+(artifacts/reports/results.md) Tj
+/F1 10 Tf
+1 0 0 1 42 281.39 Tm
+(Why it matters:) Tj
+/F3 8 Tf
+1 0 0 1 42 261.89 Tm
+(Normal framework:) Tj
+/F3 8 Tf
+1 0 0 1 42 251.89 Tm
+(  Run tests -> pass/fail) Tj
+/F3 8 Tf
+1 0 0 1 42 241.89 Tm
+() Tj
+/F3 8 Tf
+1 0 0 1 42 231.89 Tm
+(Agentic framework:) Tj
+/F3 8 Tf
+1 0 0 1 42 221.89 Tm
+(  Run tests -> understand result -> classify failure -> gate healing -> learn from execution) Tj
+/F1 10 Tf
+1 0 0 1 42 205.39 Tm
+(Healing is proposal-first. The framework does not automatically hide product bugs.) Tj
+/F1 10 Tf
+1 0 0 1 42 185.89 Tm
+(---) Tj
+/F2 16 Tf
+1 0 0 1 42 166.39 Tm
+(11. Key Terms) Tj
+/F2 12 Tf
+1 0 0 1 42 138.89 Tm
+(Spec) Tj
+/F1 10 Tf
+1 0 0 1 42 116.38999999999999 Tm
+(Raw requirement source. Example: OpenAPI, story, Jira, screenshot.) Tj
+/F2 12 Tf
+1 0 0 1 42 96.88999999999999 Tm
+(Normalized Input) Tj
+/F1 10 Tf
+1 0 0 1 42 74.38999999999999 Tm
+(Structured JSON that says what the framework understood.) Tj
+/F2 12 Tf
+1 0 0 1 42 54.889999999999986 Tm
+(Manifest Candidate) Tj
+ET
+endstream
+endobj
+29 0 obj
+<<
+/Length 3126
+>>
+stream
+BT
+/F1 10 Tf
+1 0 0 1 42 799.89 Tm
+(Draft machine-readable test plan.) Tj
+/F2 12 Tf
+1 0 0 1 42 780.39 Tm
+(Active Manifest) Tj
+/F1 10 Tf
+1 0 0 1 42 757.89 Tm
+(Approved manifest under src/ai/manifests. This drives generation.) Tj
+/F2 12 Tf
+1 0 0 1 42 738.39 Tm
+(Change Plan) Tj
+/F1 10 Tf
+1 0 0 1 42 715.89 Tm
+(Safety decision before generation. It decides create, update, reuse, stale, or broken.) Tj
+/F2 12 Tf
+1 0 0 1 42 696.39 Tm
+(Registry) Tj
+/F1 10 Tf
+1 0 0 1 42 673.89 Tm
+(Traceability memory. It maps scenarioId, sourceRef, filePath, layer, and execution status.) Tj
+/F2 12 Tf
+1 0 0 1 42 654.39 Tm
+(Page Object) Tj
+/F1 10 Tf
+1 0 0 1 42 631.89 Tm
+(Class that owns page-level UI behavior.) Tj
+/F2 12 Tf
+1 0 0 1 42 612.39 Tm
+(Component Object) Tj
+/F1 10 Tf
+1 0 0 1 42 589.89 Tm
+(Reusable UI behavior class such as dialogs, files, tables, widgets.) Tj
+/F2 12 Tf
+1 0 0 1 42 570.39 Tm
+(API Client) Tj
+/F1 10 Tf
+1 0 0 1 42 547.89 Tm
+(Domain-specific API wrapper such as UsersClient or ProductsClient.) Tj
+/F2 12 Tf
+1 0 0 1 42 528.39 Tm
+(ResourceClient) Tj
+/F1 10 Tf
+1 0 0 1 42 505.89 Tm
+(Reusable REST resource operations.) Tj
+/F2 12 Tf
+1 0 0 1 42 486.39 Tm
+(BaseApiClient) Tj
+/F1 10 Tf
+1 0 0 1 42 463.89 Tm
+(Low-level HTTP wrapper around Playwright APIRequestContext.) Tj
+/F2 12 Tf
+1 0 0 1 42 444.39 Tm
+(Feedback Loop) Tj
+/F1 10 Tf
+1 0 0 1 42 421.89 Tm
+(Post-run process that updates registry, classifies failures, creates healing plans, detects) Tj
+/F1 10 Tf
+1 0 0 1 42 408.89 Tm
+(flakes, and generates analytics.) Tj
+/F1 10 Tf
+1 0 0 1 42 389.39 Tm
+(---) Tj
+/F2 16 Tf
+1 0 0 1 42 369.89 Tm
+(12. Important Points To Remember) Tj
+/F1 10 Tf
+1 0 0 1 42 342.39 Tm
+(If you remember only five things, remember these:) Tj
+/F3 8 Tf
+1 0 0 1 42 322.89 Tm
+(1. specs/ is input) Tj
+/F3 8 Tf
+1 0 0 1 42 312.89 Tm
+(2. src/ai/manifests is active intent) Tj
+/F3 8 Tf
+1 0 0 1 42 302.89 Tm
+(3. tests/ contains executable Playwright specs) Tj
+/F3 8 Tf
+1 0 0 1 42 292.89 Tm
+(4. src/ai/registry is traceability memory) Tj
+/F3 8 Tf
+1 0 0 1 42 282.89 Tm
+(5. artifacts/ contains evidence, reports, and feedback) Tj
+/F1 10 Tf
+1 0 0 1 42 266.39 Tm
+(Daily memory:) Tj
+/F3 8 Tf
+1 0 0 1 42 246.89 Tm
+(specs = input) Tj
+/F3 8 Tf
+1 0 0 1 42 236.89 Tm
+(src/ai = brain) Tj
+/F3 8 Tf
+1 0 0 1 42 226.89 Tm
+(tests = execution) Tj
+/F3 8 Tf
+1 0 0 1 42 216.89 Tm
+(registry = memory) Tj
+/F3 8 Tf
+1 0 0 1 42 206.89 Tm
+(artifacts = evidence) Tj
+/F1 10 Tf
+1 0 0 1 42 190.39 Tm
+(Thin test rule:) Tj
+/F3 8 Tf
+1 0 0 1 42 170.89 Tm
+(UI tests call page objects.) Tj
+/F3 8 Tf
+1 0 0 1 42 160.89 Tm
+(Page objects call component objects.) Tj
+/F3 8 Tf
+1 0 0 1 42 150.89 Tm
+(API tests call API clients.) Tj
+/F3 8 Tf
+1 0 0 1 42 140.89 Tm
+(API clients call ResourceClient/BaseApiClient.) Tj
+/F1 10 Tf
+1 0 0 1 42 124.38999999999999 Tm
+(AI governance rule:) Tj
+/F3 8 Tf
+1 0 0 1 42 104.88999999999999 Tm
+(AI can generate only inside approved contracts.) Tj
+/F3 8 Tf
+1 0 0 1 42 94.88999999999999 Tm
+(Manual/framework-owned tests must not be overwritten.) Tj
+/F1 10 Tf
+1 0 0 1 42 78.38999999999999 Tm
+(---) Tj
+/F2 16 Tf
+1 0 0 1 42 58.889999999999986 Tm
+(13. What This Framework Achieves) Tj
+ET
+endstream
+endobj
+31 0 obj
+<<
+/Length 3071
+>>
+stream
+BT
+/F1 10 Tf
+1 0 0 1 42 799.89 Tm
+(This framework solves several real-world automation problems.) Tj
+/F2 12 Tf
+1 0 0 1 42 780.39 Tm
+(Problem: AI generates messy tests) Tj
+/F1 10 Tf
+1 0 0 1 42 757.89 Tm
+(Solution:) Tj
+/F3 8 Tf
+1 0 0 1 42 738.39 Tm
+(Manifest-driven generation) Tj
+/F3 8 Tf
+1 0 0 1 42 728.39 Tm
+(Governance rules) Tj
+/F3 8 Tf
+1 0 0 1 42 718.39 Tm
+(Registry traceability) Tj
+/F3 8 Tf
+1 0 0 1 42 708.39 Tm
+(Validation gates) Tj
+/F2 12 Tf
+1 0 0 1 42 691.89 Tm
+(Problem: Tests become hard to maintain) Tj
+/F1 10 Tf
+1 0 0 1 42 669.39 Tm
+(Solution:) Tj
+/F3 8 Tf
+1 0 0 1 42 649.89 Tm
+(Thin tests) Tj
+/F3 8 Tf
+1 0 0 1 42 639.89 Tm
+(Page Object Model) Tj
+/F3 8 Tf
+1 0 0 1 42 629.89 Tm
+(Component Object Model) Tj
+/F3 8 Tf
+1 0 0 1 42 619.89 Tm
+(API client wrappers) Tj
+/F3 8 Tf
+1 0 0 1 42 609.89 Tm
+(Shared fixtures) Tj
+/F2 12 Tf
+1 0 0 1 42 593.39 Tm
+(Problem: Environment data is inconsistent) Tj
+/F1 10 Tf
+1 0 0 1 42 570.89 Tm
+(Solution:) Tj
+/F3 8 Tf
+1 0 0 1 42 551.39 Tm
+(.env) Tj
+/F3 8 Tf
+1 0 0 1 42 541.39 Tm
+(.env.local) Tj
+/F3 8 Tf
+1 0 0 1 42 531.39 Tm
+(.env.qa) Tj
+/F3 8 Tf
+1 0 0 1 42 521.39 Tm
+(.env.stage) Tj
+/F3 8 Tf
+1 0 0 1 42 511.39 Tm
+(Typed RuntimeConfig) Tj
+/F2 12 Tf
+1 0 0 1 42 494.89 Tm
+(Problem: Failures are not understood) Tj
+/F1 10 Tf
+1 0 0 1 42 472.39 Tm
+(Solution:) Tj
+/F3 8 Tf
+1 0 0 1 42 452.89 Tm
+(Failure classification) Tj
+/F3 8 Tf
+1 0 0 1 42 442.89 Tm
+(Healing gate) Tj
+/F3 8 Tf
+1 0 0 1 42 432.89 Tm
+(Healing plan) Tj
+/F3 8 Tf
+1 0 0 1 42 422.89 Tm
+(Flake analysis) Tj
+/F3 8 Tf
+1 0 0 1 42 412.89 Tm
+(Execution analytics) Tj
+/F2 12 Tf
+1 0 0 1 42 396.39 Tm
+(Problem: Generated tests lose traceability) Tj
+/F1 10 Tf
+1 0 0 1 42 373.89 Tm
+(Solution:) Tj
+/F3 8 Tf
+1 0 0 1 42 354.39 Tm
+(scenarioId) Tj
+/F3 8 Tf
+1 0 0 1 42 344.39 Tm
+(sourceRef) Tj
+/F3 8 Tf
+1 0 0 1 42 334.39 Tm
+(test-registry.json) Tj
+/F3 8 Tf
+1 0 0 1 42 324.39 Tm
+(registry snapshots) Tj
+/F2 12 Tf
+1 0 0 1 42 307.89 Tm
+(Problem: API tests only check status code) Tj
+/F1 10 Tf
+1 0 0 1 42 285.39 Tm
+(Solution:) Tj
+/F3 8 Tf
+1 0 0 1 42 265.89 Tm
+(AJV schema validation) Tj
+/F3 8 Tf
+1 0 0 1 42 255.89 Tm
+(API contracts) Tj
+/F3 8 Tf
+1 0 0 1 42 245.89 Tm
+(Reusable assertion helpers) Tj
+/F1 10 Tf
+1 0 0 1 42 229.39 Tm
+(---) Tj
+/F2 16 Tf
+1 0 0 1 42 209.89 Tm
+(14. Why This Is A Strong Production-Grade Reference) Tj
+/F1 10 Tf
+1 0 0 1 42 182.39 Tm
+(This project is strong because it combines:) Tj
+/F1 10 Tf
+1 0 0 1 42 162.89 Tm
+(- Playwright execution) Tj
+/F1 10 Tf
+1 0 0 1 42 149.89 Tm
+(- TypeScript strict typing) Tj
+/F1 10 Tf
+1 0 0 1 42 136.89 Tm
+(- Page and component objects) Tj
+/F1 10 Tf
+1 0 0 1 42 123.88999999999999 Tm
+(- API client abstraction) Tj
+/F1 10 Tf
+1 0 0 1 42 110.88999999999999 Tm
+(- environment-specific runtime config) Tj
+/F1 10 Tf
+1 0 0 1 42 97.88999999999999 Tm
+(- spec-driven AI generation) Tj
+/F1 10 Tf
+1 0 0 1 42 84.88999999999999 Tm
+(- governance rules) Tj
+/F1 10 Tf
+1 0 0 1 42 71.88999999999999 Tm
+(- validation gates) Tj
+/F1 10 Tf
+1 0 0 1 42 58.889999999999986 Tm
+(- traceability registry) Tj
+/F1 10 Tf
+1 0 0 1 42 45.889999999999986 Tm
+(- feedback loop) Tj
+ET
+endstream
+endobj
+33 0 obj
+<<
+/Length 2971
+>>
+stream
+BT
+/F1 10 Tf
+1 0 0 1 42 799.89 Tm
+(- security validation) Tj
+/F1 10 Tf
+1 0 0 1 42 786.89 Tm
+(- flake and analytics reporting) Tj
+/F1 10 Tf
+1 0 0 1 42 767.39 Tm
+(Most Playwright projects have tests and page objects.) Tj
+/F1 10 Tf
+1 0 0 1 42 747.89 Tm
+(This project adds:) Tj
+/F3 8 Tf
+1 0 0 1 42 728.39 Tm
+(AI safety) Tj
+/F3 8 Tf
+1 0 0 1 42 718.39 Tm
+(spec-driven generation) Tj
+/F3 8 Tf
+1 0 0 1 42 708.39 Tm
+(registry memory) Tj
+/F3 8 Tf
+1 0 0 1 42 698.39 Tm
+(post-run intelligence) Tj
+/F3 8 Tf
+1 0 0 1 42 688.39 Tm
+(controlled healing) Tj
+/F1 10 Tf
+1 0 0 1 42 671.89 Tm
+(That is what makes it a strong reference architecture.) Tj
+/F1 10 Tf
+1 0 0 1 42 652.39 Tm
+(Honest maturity view:) Tj
+/F3 8 Tf
+1 0 0 1 42 632.89 Tm
+(Production-grade framework foundation: yes) Tj
+/F3 8 Tf
+1 0 0 1 42 622.89 Tm
+(Strong reference architecture: yes) Tj
+/F3 8 Tf
+1 0 0 1 42 612.89 Tm
+(Enterprise platform with years of execution history: not yet) Tj
+/F1 10 Tf
+1 0 0 1 42 596.39 Tm
+(---) Tj
+/F2 16 Tf
+1 0 0 1 42 576.89 Tm
+(15. Folder And File Explanation) Tj
+/F2 12 Tf
+1 0 0 1 42 549.39 Tm
+(Root Files) Tj
+/F3 8 Tf
+1 0 0 1 42 526.89 Tm
+(README.md) Tj
+/F1 10 Tf
+1 0 0 1 42 510.39 Tm
+(Project overview, commands, and quick start.) Tj
+/F3 8 Tf
+1 0 0 1 42 490.89 Tm
+(CONTRIBUTING.md) Tj
+/F1 10 Tf
+1 0 0 1 42 474.39 Tm
+(Rules for contributors and safe framework changes.) Tj
+/F3 8 Tf
+1 0 0 1 42 454.89 Tm
+(package.json) Tj
+/F1 10 Tf
+1 0 0 1 42 438.39 Tm
+(NPM commands for tests, validation, agentic workflow, reports, security, analytics.) Tj
+/F3 8 Tf
+1 0 0 1 42 418.89 Tm
+(playwright.config.ts) Tj
+/F1 10 Tf
+1 0 0 1 42 402.39 Tm
+(Playwright runtime configuration, projects, reports, trace, screenshot, video, baseURL.) Tj
+/F3 8 Tf
+1 0 0 1 42 382.89 Tm
+(playwright.auth.config.ts) Tj
+/F1 10 Tf
+1 0 0 1 42 366.39 Tm
+(Separate auth setup config.) Tj
+/F3 8 Tf
+1 0 0 1 42 346.89 Tm
+(tsconfig.json) Tj
+/F1 10 Tf
+1 0 0 1 42 330.39 Tm
+(TypeScript config, strict mode, path aliases.) Tj
+/F3 8 Tf
+1 0 0 1 42 310.89 Tm
+(eslint.config.mjs) Tj
+/F1 10 Tf
+1 0 0 1 42 294.39 Tm
+(Linting rules.) Tj
+/F3 8 Tf
+1 0 0 1 42 274.89 Tm
+(.env.example) Tj
+/F3 8 Tf
+1 0 0 1 42 264.89 Tm
+(.env.local.example) Tj
+/F3 8 Tf
+1 0 0 1 42 254.89 Tm
+(.env.qa.example) Tj
+/F3 8 Tf
+1 0 0 1 42 244.89 Tm
+(.env.stage.example) Tj
+/F1 10 Tf
+1 0 0 1 42 228.39 Tm
+(Environment config templates.) Tj
+/F2 12 Tf
+1 0 0 1 42 208.89 Tm
+(specs/) Tj
+/F3 8 Tf
+1 0 0 1 42 186.39 Tm
+(specs/openapi) Tj
+/F1 10 Tf
+1 0 0 1 42 169.89 Tm
+(OpenAPI specs for API generation.) Tj
+/F3 8 Tf
+1 0 0 1 42 150.39 Tm
+(specs/stories) Tj
+/F1 10 Tf
+1 0 0 1 42 133.89 Tm
+(Story markdown files for UI generation.) Tj
+/F3 8 Tf
+1 0 0 1 42 114.38999999999999 Tm
+(specs/jira) Tj
+/F1 10 Tf
+1 0 0 1 42 97.88999999999999 Tm
+(Jira markdown or JSON exports.) Tj
+/F3 8 Tf
+1 0 0 1 42 78.38999999999999 Tm
+(specs/user-input) Tj
+/F1 10 Tf
+1 0 0 1 42 61.889999999999986 Tm
+(Prompt or user instruction snapshots.) Tj
+/F3 8 Tf
+1 0 0 1 42 42.389999999999986 Tm
+(specs/screenshots) Tj
+ET
+endstream
+endobj
+35 0 obj
+<<
+/Length 3226
+>>
+stream
+BT
+/F1 10 Tf
+1 0 0 1 42 799.89 Tm
+(Screenshot images or metadata for visual/user-flow inputs.) Tj
+/F2 12 Tf
+1 0 0 1 42 780.39 Tm
+(src/ai/) Tj
+/F3 8 Tf
+1 0 0 1 42 757.89 Tm
+(src/ai/agent.md) Tj
+/F1 10 Tf
+1 0 0 1 42 741.39 Tm
+(Main agent behavior contract.) Tj
+/F3 8 Tf
+1 0 0 1 42 721.89 Tm
+(src/ai/governance/generation-rules.md) Tj
+/F1 10 Tf
+1 0 0 1 42 705.39 Tm
+(Rules for file naming, test titles, generation style.) Tj
+/F3 8 Tf
+1 0 0 1 42 685.89 Tm
+(src/ai/governance/framework-ownership.md) Tj
+/F1 10 Tf
+1 0 0 1 42 669.39 Tm
+(Defines files and folders the framework owns.) Tj
+/F3 8 Tf
+1 0 0 1 42 649.89 Tm
+(src/ai/governance/validation-rules.md) Tj
+/F1 10 Tf
+1 0 0 1 42 633.39 Tm
+(Defines what should block bad generated output.) Tj
+/F3 8 Tf
+1 0 0 1 42 613.89 Tm
+(src/ai/governance/healing-rules.md) Tj
+/F1 10 Tf
+1 0 0 1 42 597.39 Tm
+(Defines safe and unsafe healing behavior.) Tj
+/F3 8 Tf
+1 0 0 1 42 577.89 Tm
+(src/ai/governance/runtime-governance.md) Tj
+/F1 10 Tf
+1 0 0 1 42 561.39 Tm
+(Defines runtime artifacts, reporting, failure classification, flake analysis.) Tj
+/F3 8 Tf
+1 0 0 1 42 541.89 Tm
+(src/ai/manifests) Tj
+/F1 10 Tf
+1 0 0 1 42 525.39 Tm
+(Active scenario manifests. These drive test generation.) Tj
+/F3 8 Tf
+1 0 0 1 42 505.89 Tm
+(src/ai/registry/test-registry.json) Tj
+/F1 10 Tf
+1 0 0 1 42 489.39 Tm
+(Traceability and execution memory.) Tj
+/F3 8 Tf
+1 0 0 1 42 469.89 Tm
+(src/ai/schemas) Tj
+/F1 10 Tf
+1 0 0 1 42 453.39 Tm
+(JSON schemas for manifests and registry.) Tj
+/F3 8 Tf
+1 0 0 1 42 433.89 Tm
+(src/ai/templates) Tj
+/F1 10 Tf
+1 0 0 1 42 417.39 Tm
+(Generation templates/guides.) Tj
+/F3 8 Tf
+1 0 0 1 42 397.89 Tm
+(src/ai/skills) Tj
+/F1 10 Tf
+1 0 0 1 42 381.39 Tm
+(Agent skill instructions.) Tj
+/F2 12 Tf
+1 0 0 1 42 361.89 Tm
+(src/fixtures/) Tj
+/F3 8 Tf
+1 0 0 1 42 339.39 Tm
+(src/fixtures/base.fixture.ts) Tj
+/F1 10 Tf
+1 0 0 1 42 322.89 Tm
+(Main test fixture. Provides runtime, apiContext, API clients, page objects, and testData.) Tj
+/F3 8 Tf
+1 0 0 1 42 303.39 Tm
+(src/fixtures/role.fixture.ts) Tj
+/F1 10 Tf
+1 0 0 1 42 286.89 Tm
+(Role/storage-state helper fixture.) Tj
+/F2 12 Tf
+1 0 0 1 42 267.39 Tm
+(src/pages/) Tj
+/F3 8 Tf
+1 0 0 1 42 244.89 Tm
+(src/pages/common/base.page.ts) Tj
+/F1 10 Tf
+1 0 0 1 42 228.39 Tm
+(Base page class.) Tj
+/F3 8 Tf
+1 0 0 1 42 208.89 Tm
+(src/pages/app/test-automation-playground.page.ts) Tj
+/F1 10 Tf
+1 0 0 1 42 192.39 Tm
+(Main UI page object. Owns page-level flows such as verifyForms, verifyAlerts, verifyFiles.) Tj
+/F2 12 Tf
+1 0 0 1 42 172.89 Tm
+(src/components/) Tj
+/F1 10 Tf
+1 0 0 1 42 150.39 Tm
+(Reusable UI operation classes:) Tj
+/F3 8 Tf
+1 0 0 1 42 130.89 Tm
+(browser-dialogs.component.ts) Tj
+/F3 8 Tf
+1 0 0 1 42 120.88999999999999 Tm
+(file-operations.component.ts) Tj
+/F3 8 Tf
+1 0 0 1 42 110.88999999999999 Tm
+(form-controls.component.ts) Tj
+/F3 8 Tf
+1 0 0 1 42 100.88999999999999 Tm
+(frames-windows.component.ts) Tj
+/F3 8 Tf
+1 0 0 1 42 90.88999999999999 Tm
+(interactions.component.ts) Tj
+/F3 8 Tf
+1 0 0 1 42 80.88999999999999 Tm
+(table.component.ts) Tj
+/F3 8 Tf
+1 0 0 1 42 70.88999999999999 Tm
+(widgets.component.ts) Tj
+/F3 8 Tf
+1 0 0 1 42 60.889999999999986 Tm
+(dynamic-content.component.ts) Tj
+/F3 8 Tf
+1 0 0 1 42 50.889999999999986 Tm
+(shadow-dom.component.ts) Tj
+ET
+endstream
+endobj
+37 0 obj
+<<
+/Length 2627
+>>
+stream
+BT
+/F1 10 Tf
+1 0 0 1 42 799.89 Tm
+(These avoid stuffing all UI logic into one page object.) Tj
+/F2 12 Tf
+1 0 0 1 42 780.39 Tm
+(src/api/) Tj
+/F3 8 Tf
+1 0 0 1 42 757.89 Tm
+(src/api/core/base-api.client.ts) Tj
+/F1 10 Tf
+1 0 0 1 42 741.39 Tm
+(Low-level HTTP methods.) Tj
+/F3 8 Tf
+1 0 0 1 42 721.89 Tm
+(src/api/core/resource.client.ts) Tj
+/F1 10 Tf
+1 0 0 1 42 705.39 Tm
+(Common REST resource operations.) Tj
+/F3 8 Tf
+1 0 0 1 42 685.89 Tm
+(src/api/clients) Tj
+/F1 10 Tf
+1 0 0 1 42 669.39 Tm
+(Domain API clients: users, auth, products, carts, posts.) Tj
+/F3 8 Tf
+1 0 0 1 42 649.89 Tm
+(src/api/contracts) Tj
+/F1 10 Tf
+1 0 0 1 42 633.39 Tm
+(API response schemas for contract validation.) Tj
+/F3 8 Tf
+1 0 0 1 42 613.89 Tm
+(src/api/models) Tj
+/F1 10 Tf
+1 0 0 1 42 597.39 Tm
+(API response TypeScript models.) Tj
+/F2 12 Tf
+1 0 0 1 42 577.89 Tm
+(src/config/) Tj
+/F3 8 Tf
+1 0 0 1 42 555.39 Tm
+(src/config/env.ts) Tj
+/F1 10 Tf
+1 0 0 1 42 538.89 Tm
+(Loads .env and .env.<TEST_ENV>, validates runtime config.) Tj
+/F3 8 Tf
+1 0 0 1 42 519.39 Tm
+(src/config/constants.ts) Tj
+/F1 10 Tf
+1 0 0 1 42 502.89 Tm
+(Shared constants such as tags and storage-state paths.) Tj
+/F2 12 Tf
+1 0 0 1 42 483.39 Tm
+(src/utils/) Tj
+/F3 8 Tf
+1 0 0 1 42 460.89 Tm
+(assertions.ts) Tj
+/F1 10 Tf
+1 0 0 1 42 444.39 Tm
+(Reusable test assertions.) Tj
+/F3 8 Tf
+1 0 0 1 42 424.89 Tm
+(api-contract.ts) Tj
+/F1 10 Tf
+1 0 0 1 42 408.39 Tm
+(AJV schema assertion helper.) Tj
+/F3 8 Tf
+1 0 0 1 42 388.89 Tm
+(test-data-manager.ts) Tj
+/F1 10 Tf
+1 0 0 1 42 372.39 Tm
+(Cleanup task manager for test data lifecycle.) Tj
+/F3 8 Tf
+1 0 0 1 42 352.89 Tm
+(random.ts) Tj
+/F3 8 Tf
+1 0 0 1 42 342.89 Tm
+(naming.ts) Tj
+/F3 8 Tf
+1 0 0 1 42 332.89 Tm
+(idempotency.ts) Tj
+/F1 10 Tf
+1 0 0 1 42 316.39 Tm
+(Reusable data and naming helpers.) Tj
+/F2 12 Tf
+1 0 0 1 42 296.89 Tm
+(tests/) Tj
+/F3 8 Tf
+1 0 0 1 42 274.39 Tm
+(tests/ui) Tj
+/F1 10 Tf
+1 0 0 1 42 257.89 Tm
+(UI tests.) Tj
+/F3 8 Tf
+1 0 0 1 42 238.39 Tm
+(tests/api) Tj
+/F1 10 Tf
+1 0 0 1 42 221.89 Tm
+(API tests.) Tj
+/F3 8 Tf
+1 0 0 1 42 202.39 Tm
+(tests/hybrid) Tj
+/F1 10 Tf
+1 0 0 1 42 185.89 Tm
+(Tests that combine API setup and UI verification.) Tj
+/F2 12 Tf
+1 0 0 1 42 166.39 Tm
+(scripts/) Tj
+/F1 10 Tf
+1 0 0 1 42 143.89 Tm
+(The scripts folder is the automation engine.) Tj
+/F1 10 Tf
+1 0 0 1 42 124.38999999999999 Tm
+(Important scripts:) Tj
+/F3 8 Tf
+1 0 0 1 42 104.88999999999999 Tm
+(agentic-runner.mjs) Tj
+/F1 10 Tf
+1 0 0 1 42 88.38999999999999 Tm
+(Main orchestrator.) Tj
+/F3 8 Tf
+1 0 0 1 42 68.88999999999999 Tm
+(normalize-*.mjs) Tj
+/F1 10 Tf
+1 0 0 1 42 52.389999999999986 Tm
+(Convert raw input into normalized JSON and manifest candidates.) Tj
+ET
+endstream
+endobj
+39 0 obj
+<<
+/Length 2776
+>>
+stream
+BT
+/F3 8 Tf
+1 0 0 1 42 799.89 Tm
+(promote-manifest-candidates.mjs) Tj
+/F1 10 Tf
+1 0 0 1 42 783.39 Tm
+(Moves approved candidates into active manifests.) Tj
+/F3 8 Tf
+1 0 0 1 42 763.89 Tm
+(plan-changes.mjs) Tj
+/F1 10 Tf
+1 0 0 1 42 747.39 Tm
+(Determines create/update/reuse/stale/broken.) Tj
+/F3 8 Tf
+1 0 0 1 42 727.89 Tm
+(generate-from-manifests.mjs) Tj
+/F1 10 Tf
+1 0 0 1 42 711.39 Tm
+(Generates Playwright tests from active manifests.) Tj
+/F3 8 Tf
+1 0 0 1 42 691.89 Tm
+(sync-registry.mjs) Tj
+/F1 10 Tf
+1 0 0 1 42 675.39 Tm
+(Updates registry traceability.) Tj
+/F3 8 Tf
+1 0 0 1 42 655.89 Tm
+(validate-*.mjs) Tj
+/F3 8 Tf
+1 0 0 1 42 645.89 Tm
+(check-registry.mjs) Tj
+/F1 10 Tf
+1 0 0 1 42 629.39 Tm
+(Validation and governance checks.) Tj
+/F3 8 Tf
+1 0 0 1 42 609.89 Tm
+(classify-failures.mjs) Tj
+/F3 8 Tf
+1 0 0 1 42 599.89 Tm
+(heal-failures.mjs) Tj
+/F3 8 Tf
+1 0 0 1 42 589.89 Tm
+(analyze-flakes.mjs) Tj
+/F3 8 Tf
+1 0 0 1 42 579.89 Tm
+(generate-execution-analytics.mjs) Tj
+/F1 10 Tf
+1 0 0 1 42 563.39 Tm
+(Feedback loop scripts.) Tj
+/F2 12 Tf
+1 0 0 1 42 543.89 Tm
+(artifacts/) Tj
+/F1 10 Tf
+1 0 0 1 42 521.39 Tm
+(Artifacts are generated evidence.) Tj
+/F3 8 Tf
+1 0 0 1 42 501.89 Tm
+(artifacts/normalized-input) Tj
+/F1 10 Tf
+1 0 0 1 42 485.39 Tm
+(What the framework understood from input.) Tj
+/F3 8 Tf
+1 0 0 1 42 465.89 Tm
+(artifacts/manifests) Tj
+/F1 10 Tf
+1 0 0 1 42 449.39 Tm
+(Manifest candidates.) Tj
+/F3 8 Tf
+1 0 0 1 42 429.89 Tm
+(artifacts/plans) Tj
+/F1 10 Tf
+1 0 0 1 42 413.39 Tm
+(Change plans and promotion summaries.) Tj
+/F3 8 Tf
+1 0 0 1 42 393.89 Tm
+(artifacts/generated) Tj
+/F1 10 Tf
+1 0 0 1 42 377.39 Tm
+(Generation summary.) Tj
+/F3 8 Tf
+1 0 0 1 42 357.89 Tm
+(artifacts/reports) Tj
+/F1 10 Tf
+1 0 0 1 42 341.39 Tm
+(Playwright JSON and markdown reports.) Tj
+/F3 8 Tf
+1 0 0 1 42 321.89 Tm
+(artifacts/healing) Tj
+/F1 10 Tf
+1 0 0 1 42 305.39 Tm
+(Failure classification and healing plan.) Tj
+/F3 8 Tf
+1 0 0 1 42 285.89 Tm
+(artifacts/flakes) Tj
+/F1 10 Tf
+1 0 0 1 42 269.39 Tm
+(Flake analysis.) Tj
+/F3 8 Tf
+1 0 0 1 42 249.89 Tm
+(artifacts/analytics) Tj
+/F1 10 Tf
+1 0 0 1 42 233.39 Tm
+(Execution analytics.) Tj
+/F3 8 Tf
+1 0 0 1 42 213.89 Tm
+(artifacts/security) Tj
+/F1 10 Tf
+1 0 0 1 42 197.39 Tm
+(Secret validation output.) Tj
+/F3 8 Tf
+1 0 0 1 42 177.89 Tm
+(artifacts/validator) Tj
+/F1 10 Tf
+1 0 0 1 42 161.39 Tm
+(Framework validation output.) Tj
+/F1 10 Tf
+1 0 0 1 42 141.89 Tm
+(---) Tj
+/F2 16 Tf
+1 0 0 1 42 122.38999999999999 Tm
+(16. New Person Learning Path) Tj
+/F1 10 Tf
+1 0 0 1 42 94.88999999999999 Tm
+(If a new person joins the project, teach them in this order.) Tj
+/F2 12 Tf
+1 0 0 1 42 75.38999999999999 Tm
+(Step 1: Understand the simple memory model) Tj
+/F3 8 Tf
+1 0 0 1 42 52.889999999999986 Tm
+(specs = input) Tj
+/F3 8 Tf
+1 0 0 1 42 42.889999999999986 Tm
+(src/ai = brain) Tj
+ET
+endstream
+endobj
+41 0 obj
+<<
+/Length 3472
+>>
+stream
+BT
+/F3 8 Tf
+1 0 0 1 42 799.89 Tm
+(tests = execution) Tj
+/F3 8 Tf
+1 0 0 1 42 789.89 Tm
+(registry = memory) Tj
+/F3 8 Tf
+1 0 0 1 42 779.89 Tm
+(artifacts = evidence) Tj
+/F2 12 Tf
+1 0 0 1 42 763.39 Tm
+(Step 2: Understand UI execution) Tj
+/F3 8 Tf
+1 0 0 1 42 740.89 Tm
+(test -> fixture -> page object -> component object -> browser action) Tj
+/F2 12 Tf
+1 0 0 1 42 724.39 Tm
+(Step 3: Understand API execution) Tj
+/F3 8 Tf
+1 0 0 1 42 701.89 Tm
+(test -> fixture -> API client -> ResourceClient -> BaseApiClient -> HTTP request) Tj
+/F2 12 Tf
+1 0 0 1 42 685.39 Tm
+(Step 4: Understand spec-driven generation) Tj
+/F3 8 Tf
+1 0 0 1 42 662.89 Tm
+(input -> normalized JSON -> candidate manifest -> active manifest -> plan -> generated test) Tj
+/F2 12 Tf
+1 0 0 1 42 646.39 Tm
+(Step 5: Understand validation) Tj
+/F3 8 Tf
+1 0 0 1 42 623.89 Tm
+(npm run validate) Tj
+/F1 10 Tf
+1 0 0 1 42 607.39 Tm
+(This protects the framework.) Tj
+/F2 12 Tf
+1 0 0 1 42 587.89 Tm
+(Step 6: Understand feedback) Tj
+/F3 8 Tf
+1 0 0 1 42 565.39 Tm
+(results -> registry update -> failure classification -> healing plan -> flakes -> analytics) Tj
+/F2 12 Tf
+1 0 0 1 42 548.89 Tm
+(Step 7: Make a safe change) Tj
+/F1 10 Tf
+1 0 0 1 42 526.39 Tm
+(Small practice:) Tj
+/F3 8 Tf
+1 0 0 1 42 506.89 Tm
+(1. Add a story under specs/stories) Tj
+/F3 8 Tf
+1 0 0 1 42 496.89 Tm
+(2. Run normalize) Tj
+/F3 8 Tf
+1 0 0 1 42 486.89 Tm
+(3. Review candidate manifest) Tj
+/F3 8 Tf
+1 0 0 1 42 476.89 Tm
+(4. Promote) Tj
+/F3 8 Tf
+1 0 0 1 42 466.89 Tm
+(5. Plan) Tj
+/F3 8 Tf
+1 0 0 1 42 456.89 Tm
+(6. Generate) Tj
+/F3 8 Tf
+1 0 0 1 42 446.89 Tm
+(7. Validate) Tj
+/F3 8 Tf
+1 0 0 1 42 436.89 Tm
+(8. Run) Tj
+/F3 8 Tf
+1 0 0 1 42 426.89 Tm
+(9. Review reports) Tj
+/F1 10 Tf
+1 0 0 1 42 410.39 Tm
+(---) Tj
+/F2 16 Tf
+1 0 0 1 42 390.89 Tm
+(17. Final Cheat Sheet) Tj
+/F3 8 Tf
+1 0 0 1 42 363.39 Tm
+(Command:) Tj
+/F3 8 Tf
+1 0 0 1 42 353.39 Tm
+(  npm run agentic -- --action=full --input-type=openapi --mode=api --strategy=auto --env=qa) Tj
+/F3 8 Tf
+1 0 0 1 42 343.39 Tm
+() Tj
+/F3 8 Tf
+1 0 0 1 42 333.39 Tm
+(Input:) Tj
+/F3 8 Tf
+1 0 0 1 42 323.39 Tm
+(  specs/) Tj
+/F3 8 Tf
+1 0 0 1 42 313.39 Tm
+() Tj
+/F3 8 Tf
+1 0 0 1 42 303.39 Tm
+(Normalized:) Tj
+/F3 8 Tf
+1 0 0 1 42 293.39 Tm
+(  artifacts/normalized-input) Tj
+/F3 8 Tf
+1 0 0 1 42 283.39 Tm
+() Tj
+/F3 8 Tf
+1 0 0 1 42 273.39 Tm
+(Candidates:) Tj
+/F3 8 Tf
+1 0 0 1 42 263.39 Tm
+(  artifacts/manifests) Tj
+/F3 8 Tf
+1 0 0 1 42 253.39 Tm
+() Tj
+/F3 8 Tf
+1 0 0 1 42 243.39 Tm
+(Active manifests:) Tj
+/F3 8 Tf
+1 0 0 1 42 233.39 Tm
+(  src/ai/manifests) Tj
+/F3 8 Tf
+1 0 0 1 42 223.39 Tm
+() Tj
+/F3 8 Tf
+1 0 0 1 42 213.39 Tm
+(Plan:) Tj
+/F3 8 Tf
+1 0 0 1 42 203.39 Tm
+(  artifacts/plans/change-plan.json) Tj
+/F3 8 Tf
+1 0 0 1 42 193.39 Tm
+() Tj
+/F3 8 Tf
+1 0 0 1 42 183.39 Tm
+(Generated tests:) Tj
+/F3 8 Tf
+1 0 0 1 42 173.39 Tm
+(  tests/) Tj
+/F3 8 Tf
+1 0 0 1 42 163.39 Tm
+() Tj
+/F3 8 Tf
+1 0 0 1 42 153.39 Tm
+(Registry:) Tj
+/F3 8 Tf
+1 0 0 1 42 143.39 Tm
+(  src/ai/registry/test-registry.json) Tj
+/F3 8 Tf
+1 0 0 1 42 133.39 Tm
+() Tj
+/F3 8 Tf
+1 0 0 1 42 123.38999999999999 Tm
+(Execution results:) Tj
+/F3 8 Tf
+1 0 0 1 42 113.38999999999999 Tm
+(  artifacts/reports) Tj
+/F3 8 Tf
+1 0 0 1 42 103.38999999999999 Tm
+() Tj
+/F3 8 Tf
+1 0 0 1 42 93.38999999999999 Tm
+(Feedback:) Tj
+/F3 8 Tf
+1 0 0 1 42 83.38999999999999 Tm
+(  artifacts/healing) Tj
+/F3 8 Tf
+1 0 0 1 42 73.38999999999999 Tm
+(  artifacts/flakes) Tj
+/F3 8 Tf
+1 0 0 1 42 63.389999999999986 Tm
+(  artifacts/analytics) Tj
+/F1 10 Tf
+1 0 0 1 42 46.889999999999986 Tm
+(One final line:) Tj
+ET
+endstream
+endobj
+43 0 obj
+<<
+/Length 174
+>>
+stream
+BT
+/F3 8 Tf
+1 0 0 1 42 799.89 Tm
+(The framework turns requirements into governed, traceable, validated, executable Playwright) Tj
+/F3 8 Tf
+1 0 0 1 42 789.89 Tm
+(tests.) Tj
+ET
+endstream
+endobj
+44 0 obj
+<<
+/Length 0
+/Type /Metadata
+/Subtype /XML
+>>
+stream
+
+endstream
+endobj
+46 0 obj
+<<
+/Length 391
+/Type /ObjStm
+/N 24
+/Filter /FlateDecode
+/First 175
+>>
+stream
+xúÕí—j€@EÂ˛@#ÕÃÆ¥Ç`®&P
+≈…õ…Ék/¡`¨`Ÿ•˝˚^y•êóˆ•bv5{fˆét-“$®*2¥:òòÎHãN3D—˜
+IÑ…é˘é°@⁄B¨kŸí€öàd∂úëVÿ2§#“¶Dì¬àX`43XaI1$rÖ0˙â%¬¶˜˜Õ”œ◊äÊÎˆ•Nh>ˆ6áXSÓ)˜∂®/…'ƒuDQG‘uƒ1GÃsƒIé$Gû—|Øß«ƒbÒ[ÁjdÆyº~ª‹^Á§†YnßÍ'ı¯Ω^ªÌøU}Xé«˝_ïRÂ˘Pœ‘ÃséÁJ¬Áiæ‘˝aª`3œôá|«OSí‹Òoqÿuùÿh«¿.∑ŒÛ*Ù“≠z•Ho;£ßÊ/‰√˚O^3°˜Ûèß”»∑ÕÛˇW4ÑS$Oí≈ìî„IäÁnâgoçgoçgoçgoçgoçgoãgoãgoãgoãgoãgÔœﬁÈ}{3¸‡ŸQ+
+endstream
+endobj
+47 0 obj
+<<
+/Length 153
+/Root 1 0 R
+/Info 45 0 R
+/ID [<6F2FE3CD0F1F9457246F57A7CBD4BAC0735E4D553E826590C70B40A92F737FB0> <6F2FE3CD0F1F9457246F57A7CBD4BAC0735E4D553E826590C70B40A92F737FB0>]
+/Type /XRef
+/Size 48
+/Index [0 47]
+/W [1 3 1]
+/Filter /FlateDecode
+>>
+stream
+xú…; Ñ·ºﬂªK°PäD$*PhjGê8Äƒ$
+’∂
+ù @°‘ä^•√NÛÁõ¿WêÇë£$©$È$ôˇªÙëadÂƒ†fÂ≈‰hƒÙn≈|oïƒ≤kï≈ÍiUƒÊ`U≈nl’D[Å8ù≠P\zV]\VC‹˙VS<>VKº÷V$ﬁ[´-1C“–≥Û◊Ü˝˙
+endstream
+endobj
+startxref
+66415
+%%EOF
